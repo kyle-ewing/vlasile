@@ -3,6 +3,7 @@ package vlasile;
 import bwapi.*;
 import bwta.BWTA;
 import vlasile.buildorder.EnemyInformation;
+import vlasile.buildorder.StrategyController;
 
 public class Vlasile extends DefaultBWListener {
 
@@ -23,6 +24,8 @@ public class Vlasile extends DefaultBWListener {
         BWTA.analyze();
         System.out.println("Map data ready");
 
+        EnemyInformation.getEnemyRace();
+
         //allow user input
         bwapi.enableFlag(1);
         bwapi.setLocalSpeed(50);
@@ -31,7 +34,7 @@ public class Vlasile extends DefaultBWListener {
 
     @Override
     public void onFrame() {
-        EnemyInformation.getEnemyRace();
+        StrategyController.CurrentStrat();
     }
 
     @Override
