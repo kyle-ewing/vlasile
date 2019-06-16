@@ -4,6 +4,7 @@ import bwapi.*;
 import bwta.BWTA;
 import vlasile.buildorder.EnemyInformation;
 import vlasile.buildorder.StrategyController;
+import vlasile.units.FriendlyUnitCount;
 
 public class Vlasile extends DefaultBWListener {
 
@@ -13,6 +14,7 @@ public class Vlasile extends DefaultBWListener {
 
     private static Game bwapi;
     private static Player self;
+    private int frameCount = 0;
 
     @Override
     public void onStart() {
@@ -25,15 +27,19 @@ public class Vlasile extends DefaultBWListener {
         System.out.println("Map data ready");
 
         EnemyInformation.getEnemyRace();
+        FriendlyUnitCount.getAllFriendlyUnits();
 
         //allow user input
         bwapi.enableFlag(1);
-        bwapi.setLocalSpeed(50);
+        bwapi.setLocalSpeed(20);
 
     }
 
     @Override
     public void onFrame() {
+        frameCount++;
+
+        FriendlyUnitCount.getAllFriendlyUnits();
         StrategyController.CurrentStrat();
     }
 

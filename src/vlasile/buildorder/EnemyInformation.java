@@ -1,9 +1,7 @@
 package vlasile.buildorder;
 
-import bwapi.Game;
 import bwapi.Player;
 import bwapi.Race;
-import vlasile.GameMethods;
 import vlasile.Vlasile;
 
 public class EnemyInformation {

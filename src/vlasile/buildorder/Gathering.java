@@ -4,14 +4,12 @@ import bwapi.Game;
 import bwapi.Player;
 import bwapi.Unit;
 import bwapi.UnitType;
-import vlasile.GameMethods;
 import vlasile.Vlasile;
+import vlasile.units.FriendlyUnitCount;
 
 public class Gathering {
-    private static int freeSupply = GameMethods.getFreeSupply();
     private static Player self = Vlasile.getSelf();
     private static Game game = Vlasile.getBwapi();
-    private static int scvCount;
 
     public static void update() {
         assignMining();
@@ -19,25 +17,13 @@ public class Gathering {
     }
 
     private static boolean scvCap() {
-        scvCount = 0;
-        for(Unit myUnit : self.getUnits()) {
-            if(myUnit.getType().isWorker()) {
-                scvCount++;
-            }
-        }
-
-        if(scvCount > 15) {
-//            for(Unit myUnit : self.getUnits()) {
-//                if(myUnit.getType() == UnitType.Terran_Command_Center) {
-//                    myUnit.cancelTrain(4);
-//                }
-//            }
+        if(FriendlyUnitCount.getUnitCount().get(UnitType.Terran_SCV) >= 15) {
+            System.out.println("True");
             return true;
         }
         else {
             return false;
         }
-
     }
 
     private static void assignMining() {
@@ -66,7 +52,6 @@ public class Gathering {
     private static void buildScv() {
         if(!scvCap()) {
             for(Unit myUnit : self.getUnits()) {
-
                 if(myUnit.getType() == UnitType.Terran_Command_Center && self.minerals() >= 50) {
                     myUnit.train(UnitType.Terran_SCV);
                 }
