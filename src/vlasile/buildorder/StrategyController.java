@@ -12,7 +12,7 @@ public class StrategyController {
             System.out.println("Protoss");
         }
         else if(strategy == 2) {
-            EnemyZerg.TwoRaxFE();
+            EnemyZerg.TwoRaxAllIn();
         }
         else {
             System.out.println("Random");
