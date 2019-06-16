@@ -1,10 +1,6 @@
 package vlasile;
 
-import bwapi.Player;
-
 public class GameMethods {
-
-    private static Player _enemy = null;
 
     public GameMethods() {
     }
@@ -21,10 +17,5 @@ public class GameMethods {
         return getSuppyTotal() - getSupplyUsed();
     }
 
-    public static Player enemy() {
-        if(_enemy == null) {
-            _enemy = Vlasile.getBwapi().enemies().iterator().next();
-        }
-        return _enemy;
-    }
+
 }

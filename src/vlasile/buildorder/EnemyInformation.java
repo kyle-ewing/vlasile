@@ -8,22 +8,34 @@ import vlasile.Vlasile;
 
 public class EnemyInformation {
 
-    private static boolean raceChecked = true;
+    private static Integer strategy = null;
+    private static Player _enemy = null;
 
     public static void getEnemyRace() {
-            if(GameMethods.enemy().getRace().equals(Race.Terran)) {
-                System.out.println("Terran");
+        if(strategy == null) {
+            if(enemy().getRace().equals(Race.Terran)) {
+                strategy = 0;
             }
-            else if(GameMethods.enemy().getRace().equals(Race.Protoss)) {
-                System.out.println("Protoss");
+            else if(enemy().getRace().equals(Race.Protoss)) {
+                strategy = 1;
             }
-            else if(GameMethods.enemy().getRace().equals(Race.Zerg)) {
-                raceChecked = false;
-                EnemyZerg.TwoRaxFE();
+            else if(enemy().getRace().equals(Race.Zerg)) {
+                strategy = 2;
             }
             else {
-                System.out.println("Random");
+                strategy = 3;
             }
+        }
+    }
 
+    private static Player enemy() {
+        if(_enemy == null) {
+            _enemy = Vlasile.getBwapi().enemies().iterator().next();
+        }
+        return _enemy;
+    }
+
+    public static Integer getStrategy() {
+        return strategy;
     }
 }
