@@ -1,4 +1,4 @@
-package vlasile.units;
+package vlasile;
 
 import bwapi.Player;
 import bwapi.Unit;
@@ -7,7 +7,7 @@ import vlasile.Vlasile;
 
 import java.util.HashMap;
 
-public class FriendlyUnitCount {
+public class UnitCount {
 
     private static Player self = Vlasile.getSelf();
     private static HashMap<UnitType, Integer> unitCount;
