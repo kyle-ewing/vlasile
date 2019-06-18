@@ -6,7 +6,7 @@ public class StrategyController {
 
     public static void CurrentStrat() {
         if(strategy == 0) {
-            System.out.println("terran");
+            //System.out.println("terran");
         }
         else if(strategy == 1) {
             System.out.println("Protoss");

@@ -26,11 +26,10 @@ public class Vlasile extends DefaultBWListener {
         System.out.println("Map data ready");
 
         EnemyInformation.getEnemyRace();
-        UnitCount.getAllFriendlyUnits();
 
         //allow user input
         bwapi.enableFlag(1);
-        bwapi.setLocalSpeed(20);
+        bwapi.setLocalSpeed(15);
 
     }
 
@@ -39,13 +38,26 @@ public class Vlasile extends DefaultBWListener {
         frameCount++;
 
         Gathering.assignMining();
-        UnitCount.getAllFriendlyUnits();
         StrategyController.CurrentStrat();
     }
 
     @Override
-    public void onUnitCreate(Unit unit) {
-        //System.out.println("New unit created: " + unit.getType());;
+    public void onUnitComplete(Unit unit) {
+
+        //Enemy units will be counted if opponent is Terran
+        if(unit.getType().getRace().toString().equals("Terran") && (!unit.getType().isSpecialBuilding())) {
+            System.out.println(unit.getType());
+            UnitCount.addFriendlyUnit(unit);
+        }
+
+    }
+
+    @Override
+    public void onUnitDestroy(Unit unit) {
+        if(unit.getType().getRace().toString().equals("Terran") && (!unit.getType().isSpecialBuilding())) {
+            System.out.println("Removed: " + unit.getType());
+            UnitCount.removeFriendlyUnit(unit);
+        }
     }
 
     public static Vlasile getInstance() {

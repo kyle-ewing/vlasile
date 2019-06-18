@@ -7,23 +7,23 @@ import vlasile.UnitCount;
 
 public class WorkerProduction {
 
-    private static boolean scvCap() {
+    private static boolean flag = false;
+
+    private static void scvCap() {
         if(UnitCount.getUnitCount().get(UnitType.Terran_SCV) >= 15) {
-            System.out.println("True");
-            return true;
-        }
-        else {
-            return false;
+            System.out.println("SCV Cap reached");
+            flag = true;
         }
     }
 
     public static void buildScv() {
-        if(!scvCap()) {
+        if(!flag) {
             for(Unit myUnit : Vlasile.getSelf().getUnits()) {
-                if(myUnit.getType() == UnitType.Terran_Command_Center && Vlasile.getSelf().minerals() >= 50) {
+                if(myUnit.getType() == UnitType.Terran_Command_Center && Vlasile.getSelf().minerals() >= 50 && !myUnit.isTraining()) {
                     myUnit.train(UnitType.Terran_SCV);
                 }
             }
+            scvCap();
         }
     }
 }
