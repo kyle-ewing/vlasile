@@ -2,9 +2,8 @@ package vlasile;
 
 import bwapi.*;
 import bwta.BWTA;
-import vlasile.buildorder.EnemyInformation;
-import vlasile.buildorder.StrategyController;
-import vlasile.units.FriendlyUnitCount;
+import vlasile.enemy.EnemyInformation;
+import vlasile.enemy.StrategyController;
 
 public class Vlasile extends DefaultBWListener {
 
@@ -27,7 +26,7 @@ public class Vlasile extends DefaultBWListener {
         System.out.println("Map data ready");
 
         EnemyInformation.getEnemyRace();
-        FriendlyUnitCount.getAllFriendlyUnits();
+        UnitCount.getAllFriendlyUnits();
 
         //allow user input
         bwapi.enableFlag(1);
@@ -39,7 +38,8 @@ public class Vlasile extends DefaultBWListener {
     public void onFrame() {
         frameCount++;
 
-        FriendlyUnitCount.getAllFriendlyUnits();
+        Gathering.assignMining();
+        UnitCount.getAllFriendlyUnits();
         StrategyController.CurrentStrat();
     }
 
