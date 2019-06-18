@@ -1,4 +1,4 @@
-package vlasile.buildorder;
+package vlasile.enemy;
 
 import bwapi.Player;
 import bwapi.Race;

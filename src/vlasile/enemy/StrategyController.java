@@ -1,4 +1,4 @@
-package vlasile.buildorder;
+package vlasile.enemy;
 
 public class StrategyController {
 
