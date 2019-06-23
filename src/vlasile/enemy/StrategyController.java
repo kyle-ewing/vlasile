@@ -19,19 +19,32 @@ public class StrategyController {
     private static ArrayList<PlannedItem> plannedItems = new ArrayList<>();
 
     public static void CurrentStrat() {
-        WorkerProduction.buildScv();
         executeBuild();
+        WorkerProduction.buildScv();
+
+        if (strategy == 0) {
+            System.out.println("terran");
+        }
+        else if (strategy == 1) {
+            System.out.println("protoss");
+        }
+        else if (strategy == 2) {
+            TwoRaxAllIn.update();
+        }
+        else {
+            System.out.println("random");
+        }
     }
 
     private static void executeBuild() {
-        if(isInitialized) {
-            for(PlannedItem pi : plannedItems) {
-                if(pi.getPlannedItemStatus() == PlannedItemStatus.NOT_STARTED) {
-                    if(pi.getSupply() <= GameMethods.getSupplyUsed()) {
-                        if(GameMethods.getAvailableMinerals() >= pi.getUnitType().mineralPrice()) {
-                            if(pi.getPlannedItemType() == PlannedItemType.BUILDING) {
-                                for(Unit worker : Vlasile.getSelf().getUnits()) {
-                                    if(worker.getType().isWorker() && worker.isGatheringMinerals()) {
+        if (isInitialized) {
+            for (PlannedItem pi : plannedItems) {
+                if (pi.getPlannedItemStatus() == PlannedItemStatus.NOT_STARTED) {
+                    if (pi.getSupply() <= GameMethods.getSupplyUsed()) {
+                        if (GameMethods.getAvailableMinerals() >= pi.getUnitType().mineralPrice()) {
+                            if (pi.getPlannedItemType() == PlannedItemType.BUILDING) {
+                                for (Unit worker : Vlasile.getSelf().getUnits()) {
+                                    if (worker.getType().isWorker() && worker.isGatheringMinerals()) {
                                         GameMethods.reserveResources(pi.getUnitType());
                                         System.out.println("reserved: " + GameMethods.getReservedMinerals() + " for " + pi.getUnitType());
                                         System.out.println(GameMethods.getAvailableMinerals());
@@ -47,15 +60,15 @@ public class StrategyController {
                         }
                     }
                 }
-                else if(pi.getPlannedItemStatus() == PlannedItemStatus.SCV_ASSIGNED) {
-                    if(Vlasile.getNewestBuilding().getType() == pi.getUnitType()) {
+                else if (pi.getPlannedItemStatus() == PlannedItemStatus.SCV_ASSIGNED) {
+                    if (Vlasile.getNewestBuilding().getType() == pi.getUnitType()) {
                         GameMethods.unreserveResources(pi.getUnitType());
                         pi.setPlannedItemStatus(PlannedItemStatus.IN_PROGRESS);
                         System.out.println(pi.getUnitType() + " in progress");
                     }
                 }
-                else if(pi.getPlannedItemStatus() == PlannedItemStatus.IN_PROGRESS) {
-                    if(Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType()) {
+                else if (pi.getPlannedItemStatus() == PlannedItemStatus.IN_PROGRESS) {
+                    if (Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType()) {
                         pi.setPlannedItemStatus(PlannedItemStatus.COMPLETE);
                     }
                 }
@@ -66,13 +79,13 @@ public class StrategyController {
             }
         }
         else {
-            if(strategy == 0) {
+            if (strategy == 0) {
                 System.out.println("terran");
             }
-            else if(strategy == 1) {
+            else if (strategy == 1) {
                 System.out.println("protoss");
             }
-            else if(strategy ==2) {
+            else if (strategy == 2) {
                 TwoRaxAllIn.initializeBuild();
             }
             else {
@@ -80,7 +93,6 @@ public class StrategyController {
             }
             isInitialized = true;
         }
-
     }
 
     public static ArrayList<PlannedItem> getPlannedItems() {

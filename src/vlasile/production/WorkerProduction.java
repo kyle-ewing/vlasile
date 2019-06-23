@@ -28,7 +28,7 @@ public class WorkerProduction {
                 if(Vlasile.getFrameCount() % 30 == 0) {
                     if(scvCap()) {
                         for(Unit myUnit : Vlasile.getSelf().getUnits()) {
-                            if(myUnit.getType() == UnitType.Terran_Command_Center && Vlasile.getSelf().minerals() >= 50 && !myUnit.isTraining() && GameMethods.getAvailableMinerals() >=50) {
+                            if(myUnit.getType() == UnitType.Terran_Command_Center && !myUnit.isTraining() && GameMethods.getAvailableMinerals() >=50) {
                                 myUnit.train(UnitType.Terran_SCV);
                             }
                         }
