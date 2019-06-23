@@ -33,6 +33,7 @@ public class StrategyController {
                                 for(Unit worker : Vlasile.getSelf().getUnits()) {
                                     if(worker.getType().isWorker() && worker.isGatheringMinerals()) {
                                         GameMethods.reserveResources(pi.getUnitType());
+                                        System.out.println("reserved: " + GameMethods.getReservedMinerals() + " for " + pi.getUnitType());
                                         System.out.println(GameMethods.getAvailableMinerals());
                                         TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
                                         worker.build(pi.getUnitType(), plannedPosition);

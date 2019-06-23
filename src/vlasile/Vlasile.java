@@ -13,7 +13,7 @@ public class Vlasile extends DefaultBWListener {
 
     private static Game bwapi;
     private static Player self;
-    private int frameCount = 0;
+    private static int frameCount = 0;
     private static Unit newestBuilding;
     private static Unit newestFinishedBuilding;
 
@@ -98,5 +98,9 @@ public class Vlasile extends DefaultBWListener {
 
     public static Unit getNewestFinishedBuilding() {
         return newestFinishedBuilding;
+    }
+
+    public static int getFrameCount() {
+        return frameCount;
     }
 }

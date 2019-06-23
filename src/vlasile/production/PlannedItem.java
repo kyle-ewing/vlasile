@@ -2,17 +2,25 @@ package vlasile.production;
 
 import bwapi.UnitType;
 
-import java.util.ArrayList;
-
 public class PlannedItem {
     private UnitType unitType;
     private Integer supply = 0;
+    private int significance;
     private PlannedItemStatus plannedItemStatus;
     private PlannedItemType plannedItemType;
 
     public PlannedItem(UnitType unitType, Integer supply, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType) {
         this.unitType = unitType;
         this.supply = supply;
+        this.significance = 0;
+        this.plannedItemStatus = plannedItemStatus;
+        this.plannedItemType = plannedItemType;
+    }
+
+    public PlannedItem(UnitType unitType, Integer supply, int significance, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType) {
+        this.unitType = unitType;
+        this.supply = supply;
+        this.significance = significance;
         this.plannedItemStatus = plannedItemStatus;
         this.plannedItemType = plannedItemType;
     }
@@ -47,5 +55,9 @@ public class PlannedItem {
 
     public void setPlannedItemStatus(PlannedItemStatus plannedItemStatus) {
         this.plannedItemStatus = plannedItemStatus;
+    }
+
+    public int getSignificance() {
+        return significance;
     }
 }
