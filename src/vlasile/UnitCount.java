@@ -7,15 +7,13 @@ import bwapi.UnitType;
 import java.util.HashMap;
 
 public class UnitCount {
-
-    private static Player self = Vlasile.getSelf();
     private static HashMap<UnitType, Integer> unitCount = new HashMap<>();;
 
-    public static void initialFriendlyUnits() {
-        for(Unit unit : self.getUnits()) {
-            addFriendlyUnit(unit);
-        }
-    }
+//    public static void initialFriendlyUnits() {
+//        for(Unit unit : self.getUnits()) {
+//            addFriendlyUnit(unit);
+//        }
+//    }
 
     public static void addFriendlyUnit(Unit unit) {
         if(!unitCount.containsKey(unit.getType())) {

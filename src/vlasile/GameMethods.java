@@ -9,7 +9,7 @@ public class GameMethods {
     private static int reservedMinerals = 0;
     private static int reservedGas = 0;
     private static int availableMinerals;
-    private static int availableGas = Vlasile.getSelf().minerals();
+    private static int availableGas;
 
     public GameMethods() {
     }
@@ -100,11 +100,11 @@ public class GameMethods {
     }
 
     public static int getAvailableMinerals() {
-        return availableMinerals = Vlasile.getSelf().minerals();
+        return availableMinerals = Vlasile.getSelf().minerals() - reservedMinerals;
     }
 
     public static int getAvailableGas() {
-        return availableGas;
+        return availableGas = Vlasile.getSelf().gas() - reservedGas;
     }
 
 }

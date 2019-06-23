@@ -10,7 +10,6 @@ public class WorkerProduction {
 
     private static boolean scvCap() {
         if(UnitCount.getUnitCount().get(UnitType.Terran_SCV) >= 15) {
-            System.out.println("SCV Cap reached");
             return false;
         }
         else {
