@@ -1,4 +1,3 @@
-out/
-bwapi-data/
-.idea/
-.iml
+out
+bwapi-data
+.idea

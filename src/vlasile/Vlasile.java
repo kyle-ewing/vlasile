@@ -14,6 +14,8 @@ public class Vlasile extends DefaultBWListener {
     private static Game bwapi;
     private static Player self;
     private int frameCount = 0;
+    private static Unit newestBuilding;
+    private static Unit newestFinishedBuilding;
 
     @Override
     public void onStart() {
@@ -29,32 +31,42 @@ public class Vlasile extends DefaultBWListener {
 
         //allow user input
         bwapi.enableFlag(1);
-        bwapi.setLocalSpeed(15);
-
+        bwapi.setLocalSpeed(10);
     }
 
     @Override
     public void onFrame() {
         frameCount++;
+        bwapi.drawTextScreen(10,10, "Frame Count: " + frameCount);
+        bwapi.drawTextScreen(10,25, "SCV Count: " + UnitCount.getUnitCount().get(UnitType.Terran_SCV));
+
 
         Gathering.assignMining();
         StrategyController.CurrentStrat();
     }
 
     @Override
-    public void onUnitComplete(Unit unit) {
+    public  void onUnitCreate(Unit unit) {
+        if(unit.getType().isBuilding() && unit.getPlayer() == self) {
+            newestBuilding = unit;
+            System.out.println(newestBuilding.getType() + " newest building");
+        }
+    }
 
-        //Enemy units will be counted if opponent is Terran
-        if(unit.getType().getRace().toString().equals("Terran") && (!unit.getType().isSpecialBuilding())) {
-            System.out.println(unit.getType());
+    @Override
+    public void onUnitComplete(Unit unit) {
+        if(unit.getPlayer() == self) {
+            System.out.println("Finished Unit: " + unit.getType());
             UnitCount.addFriendlyUnit(unit);
         }
-
+        if(unit.getPlayer() == self && unit.getType().isBuilding()) {
+            newestFinishedBuilding = unit;
+        }
     }
 
     @Override
     public void onUnitDestroy(Unit unit) {
-        if(unit.getType().getRace().toString().equals("Terran") && (!unit.getType().isSpecialBuilding())) {
+        if(unit.getPlayer() == self) {
             System.out.println("Removed: " + unit.getType());
             UnitCount.removeFriendlyUnit(unit);
         }
@@ -78,5 +90,13 @@ public class Vlasile extends DefaultBWListener {
 
     public static Player getSelf() {
         return self;
+    }
+
+    public static Unit getNewestBuilding() {
+        return newestBuilding;
+    }
+
+    public static Unit getNewestFinishedBuilding() {
+        return newestFinishedBuilding;
     }
 }
