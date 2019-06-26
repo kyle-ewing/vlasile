@@ -1,3 +1,6 @@
 out
 bwapi-data
 .idea
+.classpath
+.project
+*.log
