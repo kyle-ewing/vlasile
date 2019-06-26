@@ -46,8 +46,7 @@ public class StrategyController {
                                 for (Unit worker : Vlasile.getSelf().getUnits()) {
                                     if (worker.getType().isWorker() && worker.isGatheringMinerals()) {
                                         GameMethods.reserveResources(pi.getUnitType());
-                                        System.out.println("reserved: " + GameMethods.getReservedMinerals() + " for " + pi.getUnitType());
-                                        System.out.println(GameMethods.getAvailableMinerals());
+                                        System.out.println(GameMethods.getReservedMinerals() + " minerals reserved, " + GameMethods.getAvailableMinerals() + " available");
                                         TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
                                         worker.build(pi.getUnitType(), plannedPosition);
                                         pi.setPlannedItemStatus(PlannedItemStatus.SCV_ASSIGNED);
@@ -61,9 +60,9 @@ public class StrategyController {
                     }
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.SCV_ASSIGNED) {
-                    if (Vlasile.getNewestBuilding().getType() == pi.getUnitType()) {
-                        GameMethods.unreserveResources(pi.getUnitType());
+                    if (Vlasile.getNewestBuilding().getID() == pi.getID()) {
                         pi.setPlannedItemStatus(PlannedItemStatus.IN_PROGRESS);
+                        GameMethods.unreserveResources(pi.getUnitType());
                         System.out.println(pi.getUnitType() + " in progress");
                     }
                 }

@@ -8,13 +8,14 @@ public class PlannedItem {
     private int significance;
     private PlannedItemStatus plannedItemStatus;
     private PlannedItemType plannedItemType;
+    private Integer ID;
 
     public PlannedItem(UnitType unitType, Integer supply, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType) {
         this.unitType = unitType;
         this.supply = supply;
-        this.significance = 0;
         this.plannedItemStatus = plannedItemStatus;
         this.plannedItemType = plannedItemType;
+        this.ID = null;
     }
 
     public PlannedItem(UnitType unitType, Integer supply, int significance, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType) {
@@ -59,5 +60,13 @@ public class PlannedItem {
 
     public int getSignificance() {
         return significance;
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 }

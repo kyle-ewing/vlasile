@@ -4,6 +4,7 @@ import bwapi.*;
 import bwta.BWTA;
 import vlasile.enemy.EnemyInformation;
 import vlasile.enemy.StrategyController;
+import vlasile.production.PlannedItem;
 
 public class Vlasile extends DefaultBWListener {
 
@@ -40,16 +41,27 @@ public class Vlasile extends DefaultBWListener {
         bwapi.drawTextScreen(10,10, "Frame Count: " + frameCount);
         bwapi.drawTextScreen(10,25, "SCV Count: " + UnitCount.getUnitCount().get(UnitType.Terran_SCV));
 
+        if(UnitCount.getUnitCount().containsKey(UnitType.Terran_Marine)) {
+            bwapi.drawTextScreen(10,40, "Marine Count: " + UnitCount.getUnitCount().get(UnitType.Terran_Marine));
+        }
 
         Gathering.assignMining();
         StrategyController.CurrentStrat();
     }
 
     @Override
-    public  void onUnitCreate(Unit unit) {
+    public void onUnitCreate(Unit unit) {
         if(unit.getType().isBuilding() && unit.getPlayer() == self) {
             newestBuilding = unit;
-            System.out.println(newestBuilding.getType() + " newest building");
+
+            for(PlannedItem pi : StrategyController.getPlannedItems()) {
+                if(pi.getID() == null) {
+                    pi.setID(unit.getID());
+                    break;
+                }
+            }
+
+            System.out.println("Newest building: " + newestBuilding.getType() + ". Building ID: " + newestBuilding.getID());
         }
     }
 
@@ -61,6 +73,7 @@ public class Vlasile extends DefaultBWListener {
         }
         if(unit.getPlayer() == self && unit.getType().isBuilding()) {
             newestFinishedBuilding = unit;
+
         }
     }
 

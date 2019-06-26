@@ -10,6 +10,7 @@ public class GameMethods {
     private static int reservedGas = 0;
     private static int availableMinerals;
     private static int availableGas;
+    private static boolean isReserved = false;
 
     public GameMethods() {
     }
@@ -31,6 +32,7 @@ public class GameMethods {
         reservedGas += unitType.gasPrice();
         availableMinerals = Vlasile.getSelf().minerals() - reservedMinerals;
         availableGas = Vlasile.getSelf().gas() - reservedGas;
+        isReserved = true;
     }
 
     public static void unreserveResources(UnitType unitType) {
@@ -38,11 +40,12 @@ public class GameMethods {
         reservedGas -= unitType.gasPrice();
         availableMinerals = Vlasile.getSelf().minerals() - reservedMinerals;
         availableGas = Vlasile.getSelf().gas() - reservedGas;
+        isReserved = false;
     }
 
     public static TilePosition getBuildTile(Unit builder, UnitType buildingType, TilePosition aroundTile) {
         TilePosition ret = null;
-        int maxDist = 5;
+        int maxDist = 3;
         int stopDist = 40;
 
         // Refinery, Assimilator, Extractor
@@ -107,4 +110,7 @@ public class GameMethods {
         return availableGas = Vlasile.getSelf().gas() - reservedGas;
     }
 
+    public static boolean isIsReserved() {
+        return isReserved;
+    }
 }
