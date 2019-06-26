@@ -1,6 +1,7 @@
 package vlasile.buildorders;
 
 import bwapi.UnitType;
+import vlasile.GameMethods;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.enemy.StrategyController;
@@ -8,9 +9,11 @@ import vlasile.production.PlannedItem;
 import vlasile.production.PlannedItemStatus;
 import vlasile.production.PlannedItemType;
 import vlasile.production.UnitProduction;
+import vlasile.scouting.ScvScout;
 
 public class TwoRaxAllIn {
     private static UnitProduction uP = new UnitProduction();
+    private static boolean hasScout = false;
 
     public static void initializeBuild() {
         StrategyController.getPlannedItems().add(new PlannedItem(UnitType.Terran_Supply_Depot, 9, PlannedItemStatus.NOT_STARTED, PlannedItemType.BUILDING));
@@ -23,6 +26,10 @@ public class TwoRaxAllIn {
 
     public static void update() {
         marines();
+
+        if(!hasScout && GameMethods.getSupplyUsed() >= 10) {
+            ScvScout.update();
+        }
     }
 
     public static void marines() {

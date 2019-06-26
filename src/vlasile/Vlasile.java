@@ -85,6 +85,18 @@ public class Vlasile extends DefaultBWListener {
         }
     }
 
+    @Override
+    public void onUnitShow(Unit unit) {
+        if(unit.getPlayer() != self) {
+            if(!unit.getType().isNeutral()) {
+                if(unit.getType().isBuilding()) {
+                    System.out.println("New enemy building found: " + unit.getType());
+                    UnitCount.addEnemyBuilding(unit);
+                }
+            }
+        }
+    }
+
     public static Vlasile getInstance() {
         if(instance == null) {
             instance = new Vlasile();
