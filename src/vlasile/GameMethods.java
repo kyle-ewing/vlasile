@@ -1,5 +1,6 @@
 package vlasile;
 
+import bwapi.Position;
 import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
@@ -118,6 +119,10 @@ public class GameMethods {
                 }
             }
         }
+    }
+
+    public static Position translatePositionByPixels(Position position, int X, int Y) {
+        return new Position(position.getX() + X, position.getY() + Y);
     }
 
     public static int getReservedMinerals() {

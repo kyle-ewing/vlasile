@@ -2,6 +2,7 @@ package vlasile.scouting;
 
 import bwapi.Unit;
 import bwta.BaseLocation;
+import vlasile.Painter;
 import vlasile.Vlasile;
 import vlasile.enemy.EnemyInformation;
 
@@ -11,6 +12,9 @@ public class ScvScout {
     public static void update() {
         if(scout == null) {
             assignScout();
+        }
+        else {
+            Painter.paintScout();
         }
 
 
@@ -42,5 +46,7 @@ public class ScvScout {
         return null;
     }
 
-
+    public static Unit getScout() {
+        return scout;
+    }
 }

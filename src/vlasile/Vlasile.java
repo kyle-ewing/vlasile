@@ -40,11 +40,12 @@ public class Vlasile extends DefaultBWListener {
     public void onFrame() {
         frameCount++;
         bwapi.drawTextScreen(10,10, "Seconds passed: " + GameMethods.getSeconds());
-        bwapi.drawTextScreen(10,25, "SCV Count: " + UnitCount.getUnitCount().get(UnitType.Terran_SCV));
+        bwapi.drawTextScreen(10,25, "Frame count: " + frameCount);
+        bwapi.drawTextScreen(10,40, "SCV Count: " + UnitCount.getUnitCount().get(UnitType.Terran_SCV));
 
 
         if(UnitCount.getUnitCount().containsKey(UnitType.Terran_Marine)) {
-            bwapi.drawTextScreen(10,40, "Marine Count: " + UnitCount.getUnitCount().get(UnitType.Terran_Marine));
+            bwapi.drawTextScreen(10,55, "Marine Count: " + UnitCount.getUnitCount().get(UnitType.Terran_Marine));
         }
 
         Gathering.assignMining();

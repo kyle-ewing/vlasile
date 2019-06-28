@@ -3,12 +3,15 @@ package vlasile.enemy;
 import bwapi.TilePosition;
 import bwapi.Unit;
 import vlasile.GameMethods;
+import vlasile.Painter;
 import vlasile.Vlasile;
 import vlasile.buildorders.TwoRaxAllIn;
+import vlasile.managers.ArmyManager;
 import vlasile.production.PlannedItem;
 import vlasile.production.PlannedItemStatus;
 import vlasile.production.PlannedItemType;
 import vlasile.production.WorkerProduction;
+import vlasile.scouting.ScvScout;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,7 @@ public class StrategyController {
         else if (race == 2) {
             TwoRaxAllIn.update();
             defineEnemyZergStrategy();
+            ArmyManager.update();
         }
         else {
             System.out.println("random");
@@ -45,7 +49,7 @@ public class StrategyController {
                         if (GameMethods.getAvailableMinerals() >= pi.getUnitType().mineralPrice()) {
                             if (pi.getPlannedItemType() == PlannedItemType.BUILDING) {
                                 for (Unit worker : Vlasile.getSelf().getUnits()) {
-                                    if (worker.getType().isWorker() && worker.isGatheringMinerals()) {
+                                    if (worker.getType().isWorker() && worker.isGatheringMinerals() && ScvScout.getScout() != worker) {
                                         GameMethods.reserveResources(pi.getUnitType());
                                         System.out.println(GameMethods.getReservedMinerals() + " minerals reserved, " + GameMethods.getAvailableMinerals() + " available");
                                         TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
@@ -93,6 +97,7 @@ public class StrategyController {
             }
             isInitialized = true;
         }
+        Painter.drawBuilderText();
     }
 
     public static void defineEnemyZergStrategy() {
