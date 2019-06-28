@@ -65,6 +65,13 @@ public class Vlasile extends DefaultBWListener {
 
             System.out.println("Newest building: " + newestBuilding.getType() + ". Building ID: " + newestBuilding.getID());
         }
+
+        if(unit.getPlayer() != self) {
+            if(!unit.getType().isNeutral()) {
+                UnitCount.addEnemyUnit(unit);
+                System.out.println("on create");
+            }
+        }
     }
 
     @Override
@@ -76,6 +83,11 @@ public class Vlasile extends DefaultBWListener {
         if(unit.getPlayer() == self && unit.getType().isBuilding()) {
             newestFinishedBuilding = unit;
 
+        }
+        if(unit.getPlayer() != self) {
+            if(!unit.getType().isNeutral()) {
+                UnitCount.addEnemyUnit(unit);
+            }
         }
     }
 
@@ -95,18 +107,21 @@ public class Vlasile extends DefaultBWListener {
                 if(unit.getType().isBuilding()) {
                     UnitCount.addEnemyBuilding(unit);
                 }
+
             }
         }
+        GameMethods.updateUnitType(unit);
     }
 
     @Override
     public void onUnitMorph(Unit unit) {
         if(unit.getPlayer() != self) {
+            UnitCount.addEnemyUnit(unit);
             if(unit.getType().isBuilding()) {
-                System.out.println("New enemy building found: " + unit.getType());
                 UnitCount.addEnemyBuilding(unit);
             }
         }
+        GameMethods.updateUnitType(unit);
     }
 
     public static Vlasile getInstance() {

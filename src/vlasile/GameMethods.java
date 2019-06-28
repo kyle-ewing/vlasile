@@ -6,6 +6,8 @@ import bwapi.UnitType;
 import javafx.scene.shape.VLineTo;
 import vlasile.enemy.EnemyBuildingInfo;
 
+import java.util.Map;
+
 public class GameMethods {
     private static int reservedMinerals = 0;
     private static int reservedGas = 0;
@@ -93,12 +95,29 @@ public class GameMethods {
 
     public static int countUnitsOfType(UnitType unitType) {
         int total = 0;
-        for (EnemyBuildingInfo enemyBuildingInfo : UnitCount.getEnemyBuildings().values()) {
-            if (enemyBuildingInfo.getUnitType() == unitType) {
+//        for (EnemyBuildingInfo enemyBuildingInfo : UnitCount.getEnemyBuildings().values()) {
+//            if (enemyBuildingInfo.getUnitType() == unitType) {
+//                total++;
+//            }
+//        }
+        for(UnitType uT: UnitCount.getEnemyUnitCount().values()) {
+            if (uT == unitType) {
                 total++;
             }
         }
         return total;
+    }
+
+    public static void updateUnitType(Unit unit) {
+
+        for(Map.Entry<Integer, UnitType> u : UnitCount.getEnemyUnitCount().entrySet()) {
+            if(u.getKey() == unit.getID()) {
+                if(u.getValue() != unit.getType()) {
+                    System.out.println("Changed " + u.getValue() + " to " + unit.getType());
+                    u.setValue(unit.getType());
+                }
+            }
+        }
     }
 
     public static int getReservedMinerals() {

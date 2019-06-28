@@ -48,6 +48,7 @@ public class UnitCount {
             enemyUnitCount.put(unit.getID(), unit.getType());
             System.out.println("New enemy " + unit.getType() + " found");
         }
+
     }
 
     public static HashMap<UnitType, Integer> getUnitCount() {
