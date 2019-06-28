@@ -5,6 +5,7 @@ import bwta.BWTA;
 import vlasile.enemy.EnemyInformation;
 import vlasile.enemy.EnemyZergStrategy;
 import vlasile.enemy.StrategyController;
+import vlasile.managers.WorkerManager;
 import vlasile.production.PlannedItem;
 
 public class Vlasile extends DefaultBWListener {
@@ -50,6 +51,7 @@ public class Vlasile extends DefaultBWListener {
 
         Gathering.assignMining();
         StrategyController.CurrentStrat();
+        WorkerManager.update();
     }
 
     @Override
@@ -78,8 +80,11 @@ public class Vlasile extends DefaultBWListener {
     @Override
     public void onUnitComplete(Unit unit) {
         if(unit.getPlayer() == self) {
-            System.out.println("Finished Unit: " + unit.getType());
+            System.out.println("Finished Units: " + unit.getType());
             UnitCount.addFriendlyUnit(unit);
+            if(unit.getType().isWorker()) {
+                UnitCount.addWorker(unit);
+            }
         }
         if(unit.getPlayer() == self && unit.getType().isBuilding()) {
             newestFinishedBuilding = unit;
@@ -97,6 +102,9 @@ public class Vlasile extends DefaultBWListener {
         if(unit.getPlayer() == self) {
             System.out.println("Removed: " + unit.getType());
             UnitCount.removeFriendlyUnit(unit);
+            if(unit.getType().isWorker()) {
+                UnitCount.removeWorker(unit);
+            }
         }
     }
 

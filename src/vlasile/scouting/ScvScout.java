@@ -13,10 +13,6 @@ public class ScvScout {
         if(scout == null) {
             assignScout();
         }
-        else {
-            Painter.paintScout();
-        }
-
 
         findEnemyBase(scout);
 

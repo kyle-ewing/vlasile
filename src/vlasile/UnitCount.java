@@ -1,18 +1,17 @@
 package vlasile;
 
-import bwapi.Player;
-import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
 import vlasile.enemy.EnemyBuildingInfo;
+import vlasile.units.unitstatus.WorkerStatus;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UnitCount {
     private static HashMap<UnitType, Integer> unitCount = new HashMap<>();
     private static HashMap<Integer, EnemyBuildingInfo> enemyBuildings = new HashMap<>();
     private static HashMap<Integer, UnitType> enemyUnitCount = new HashMap<>();
+    private static HashMap<Integer, WorkerStatus> workers = new HashMap<>();
 
     public static void addFriendlyUnit(Unit unit) {
         if(!unitCount.containsKey(unit.getType())) {
@@ -51,6 +50,19 @@ public class UnitCount {
 
     }
 
+    public static void addWorker(Unit unit) {
+        if(!workers.containsKey(unit.getID())) {
+            workers.put(unit.getID(), WorkerStatus.MINERALS);
+        }
+    }
+
+    public static void removeWorker(Unit unit) {
+        if(workers.containsKey(unit.getID())) {
+            workers.remove(unit.getID());
+            System.out.println("Removed " + unit.getType() + unit.getID());
+        }
+    }
+
     public static HashMap<UnitType, Integer> getUnitCount() {
         return unitCount;
     }
@@ -61,5 +73,9 @@ public class UnitCount {
 
     public static HashMap<Integer, UnitType> getEnemyUnitCount() {
         return enemyUnitCount;
+    }
+
+    public static HashMap<Integer, WorkerStatus> getWorkers() {
+        return workers;
     }
 }
