@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class StrategyController {
 
-    private static Integer strategy = EnemyInformation.getStrategy();
+    private static Integer race = EnemyInformation.getRace();
     private static boolean isInitialized = false;
     private static ArrayList<PlannedItem> plannedItems = new ArrayList<>();
 
@@ -22,14 +22,15 @@ public class StrategyController {
         executeBuild();
         WorkerProduction.buildScv();
 
-        if (strategy == 0) {
+        if (race == 0) {
             System.out.println("terran");
         }
-        else if (strategy == 1) {
+        else if (race == 1) {
             System.out.println("protoss");
         }
-        else if (strategy == 2) {
+        else if (race == 2) {
             TwoRaxAllIn.update();
+            defineEnemyZergStrategy();
         }
         else {
             System.out.println("random");
@@ -78,13 +79,13 @@ public class StrategyController {
             }
         }
         else {
-            if (strategy == 0) {
+            if (race == 0) {
                 System.out.println("terran");
             }
-            else if (strategy == 1) {
+            else if (race == 1) {
                 System.out.println("protoss");
             }
-            else if (strategy == 2) {
+            else if (race == 2) {
                 TwoRaxAllIn.initializeBuild();
             }
             else {
@@ -92,6 +93,20 @@ public class StrategyController {
             }
             isInitialized = true;
         }
+    }
+
+    public static void defineEnemyZergStrategy() {
+        EnemyStrategy definedStrat = EnemyZergStrategy.detectStrategy();
+        if(definedStrat != null) {
+            changeEnemyStrategy(definedStrat);
+        }
+    }
+
+    private static void changeEnemyStrategy(EnemyStrategy strat) {
+        if(!EnemyStrategy.isEnemyStratKnown()) {
+            Vlasile.getBwapi().sendText("Enemy strategy: " + strat.toString());
+        }
+        EnemyStrategy.setEnemyStrategy(strat);
     }
 
     public static ArrayList<PlannedItem> getPlannedItems() {

@@ -18,6 +18,14 @@ public class PlannedItem {
         this.ID = null;
     }
 
+    public PlannedItem(UnitType unitType, int significance, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType, Integer ID) {
+        this.unitType = unitType;
+        this.significance = significance;
+        this.plannedItemStatus = plannedItemStatus;
+        this.plannedItemType = plannedItemType;
+        this.ID = ID;
+    }
+
     public PlannedItem(UnitType unitType, Integer supply, int significance, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType) {
         this.unitType = unitType;
         this.supply = supply;

@@ -12,7 +12,7 @@ public class WorkerProduction {
     private static UnitProduction scv = new UnitProduction();
 
     private static boolean scvCap() {
-        if (UnitCount.getUnitCount().get(UnitType.Terran_SCV) >= 15) {
+        if (UnitCount.getUnitCount().get(UnitType.Terran_SCV) >= 18) {
             return false;
         } else {
             return true;

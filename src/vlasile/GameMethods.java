@@ -4,6 +4,7 @@ import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
 import javafx.scene.shape.VLineTo;
+import vlasile.enemy.EnemyBuildingInfo;
 
 public class GameMethods {
     private static int reservedMinerals = 0;
@@ -13,6 +14,10 @@ public class GameMethods {
     private static boolean isReserved = false;
 
     public GameMethods() {
+    }
+
+    public static int getSeconds() {
+        return Vlasile.getFrameCount() / 30;
     }
 
     public static int getSupplyUsed() {
@@ -84,6 +89,16 @@ public class GameMethods {
         if (ret == null)
             Vlasile.getBwapi().printf("Unable to find suitable build position for " + buildingType.toString());
         return ret;
+    }
+
+    public static int countUnitsOfType(UnitType unitType) {
+        int total = 0;
+        for (EnemyBuildingInfo enemyBuildingInfo : UnitCount.getEnemyBuildings().values()) {
+            if (enemyBuildingInfo.getUnitType() == unitType) {
+                total++;
+            }
+        }
+        return total;
     }
 
     public static int getReservedMinerals() {

@@ -3,6 +3,7 @@ package vlasile;
 import bwapi.*;
 import bwta.BWTA;
 import vlasile.enemy.EnemyInformation;
+import vlasile.enemy.EnemyZergStrategy;
 import vlasile.enemy.StrategyController;
 import vlasile.production.PlannedItem;
 
@@ -38,8 +39,9 @@ public class Vlasile extends DefaultBWListener {
     @Override
     public void onFrame() {
         frameCount++;
-        bwapi.drawTextScreen(10,10, "Frame Count: " + frameCount);
+        bwapi.drawTextScreen(10,10, "Seconds passed: " + GameMethods.getSeconds());
         bwapi.drawTextScreen(10,25, "SCV Count: " + UnitCount.getUnitCount().get(UnitType.Terran_SCV));
+
 
         if(UnitCount.getUnitCount().containsKey(UnitType.Terran_Marine)) {
             bwapi.drawTextScreen(10,40, "Marine Count: " + UnitCount.getUnitCount().get(UnitType.Terran_Marine));
@@ -89,8 +91,8 @@ public class Vlasile extends DefaultBWListener {
     public void onUnitShow(Unit unit) {
         if(unit.getPlayer() != self) {
             if(!unit.getType().isNeutral()) {
+                UnitCount.addEnemyUnit(unit);
                 if(unit.getType().isBuilding()) {
-                    System.out.println("New enemy building found: " + unit.getType());
                     UnitCount.addEnemyBuilding(unit);
                 }
             }

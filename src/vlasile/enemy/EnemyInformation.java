@@ -3,31 +3,30 @@ package vlasile.enemy;
 import bwapi.Player;
 import bwapi.Race;
 import bwapi.UnitType;
-import vlasile.UnitCount;
 import vlasile.Vlasile;
 
 public class EnemyInformation {
 
-    private static Integer strategy = null;
+    private static Integer race = null;
     private static Player _enemy = null;
     private static UnitType baseType;
 
     public static void getEnemyRace() {
-        if(strategy == null) {
+        if(race == null) {
             if(enemy().getRace().equals(Race.Terran)) {
                 baseType = UnitType.Terran_Command_Center;
-                strategy = 0;
+                race = 0;
             }
             else if(enemy().getRace().equals(Race.Protoss)) {
                 baseType = UnitType.Protoss_Nexus;
-                strategy = 1;
+                race = 1;
             }
             else if(enemy().getRace().equals(Race.Zerg)) {
                 baseType = UnitType.Zerg_Hatchery;
-                strategy = 2;
+                race = 2;
             }
             else {
-                strategy = 3;
+                race = 3;
             }
         }
     }
@@ -44,7 +43,7 @@ public class EnemyInformation {
             return false;
     }
 
-    public static Integer getStrategy() {
-        return strategy;
+    public static Integer getRace() {
+        return race;
     }
 }
