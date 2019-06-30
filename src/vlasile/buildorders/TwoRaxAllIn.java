@@ -3,7 +3,6 @@ package vlasile.buildorders;
 import bwapi.UnitType;
 import vlasile.GameMethods;
 import vlasile.UnitCount;
-import vlasile.Vlasile;
 import vlasile.enemy.StrategyController;
 import vlasile.production.PlannedItem;
 import vlasile.production.PlannedItemStatus;

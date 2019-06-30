@@ -3,7 +3,6 @@ package vlasile;
 import bwapi.*;
 import bwta.BWTA;
 import vlasile.enemy.EnemyInformation;
-import vlasile.enemy.EnemyZergStrategy;
 import vlasile.enemy.StrategyController;
 import vlasile.managers.WorkerManager;
 import vlasile.production.PlannedItem;
@@ -52,6 +51,7 @@ public class Vlasile extends DefaultBWListener {
         Gathering.assignMining();
         StrategyController.CurrentStrat();
         WorkerManager.update();
+        Painter.paintChoke();
     }
 
     @Override
@@ -72,7 +72,6 @@ public class Vlasile extends DefaultBWListener {
         if(unit.getPlayer() != self) {
             if(!unit.getType().isNeutral()) {
                 UnitCount.addEnemyUnit(unit);
-                System.out.println("on create");
             }
         }
     }

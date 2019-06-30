@@ -4,6 +4,7 @@ import bwapi.TilePosition;
 import bwapi.Unit;
 import vlasile.GameMethods;
 import vlasile.Painter;
+import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.buildorders.TwoRaxAllIn;
 import vlasile.managers.ArmyManager;
@@ -12,6 +13,7 @@ import vlasile.production.PlannedItemStatus;
 import vlasile.production.PlannedItemType;
 import vlasile.production.WorkerProduction;
 import vlasile.scouting.ScvScout;
+import vlasile.unitstatus.WorkerStatus;
 
 import java.util.ArrayList;
 
@@ -54,6 +56,7 @@ public class StrategyController {
                                         System.out.println(GameMethods.getReservedMinerals() + " minerals reserved, " + GameMethods.getAvailableMinerals() + " available");
                                         TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
                                         worker.build(pi.getUnitType(), plannedPosition);
+                                        UnitCount.getWorkers().put(worker.getID(), WorkerStatus.BUILD);
                                         pi.setPlannedItemStatus(PlannedItemStatus.SCV_ASSIGNED);
                                         System.out.println("SCV assigned to build: " + pi.getUnitType());
                                         break;

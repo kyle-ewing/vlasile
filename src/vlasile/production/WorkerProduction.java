@@ -1,10 +1,7 @@
 package vlasile.production;
 
-import bwapi.Game;
-import bwapi.Unit;
 import bwapi.UnitType;
 import vlasile.GameMethods;
-import vlasile.Vlasile;
 import vlasile.UnitCount;
 import vlasile.enemy.StrategyController;
 

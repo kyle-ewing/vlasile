@@ -3,7 +3,7 @@ package vlasile;
 import bwapi.Unit;
 import bwapi.UnitType;
 import vlasile.enemy.EnemyBuildingInfo;
-import vlasile.units.unitstatus.WorkerStatus;
+import vlasile.unitstatus.WorkerStatus;
 
 import java.util.HashMap;
 

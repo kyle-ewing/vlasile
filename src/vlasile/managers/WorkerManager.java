@@ -5,7 +5,7 @@ import vlasile.Painter;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.scouting.ScvScout;
-import vlasile.units.unitstatus.WorkerStatus;
+import vlasile.unitstatus.WorkerStatus;
 
 import java.util.HashMap;
 

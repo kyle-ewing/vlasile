@@ -4,8 +4,6 @@ import bwapi.Position;
 import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
-import javafx.scene.shape.VLineTo;
-import vlasile.enemy.EnemyBuildingInfo;
 
 import java.util.Map;
 
@@ -96,11 +94,6 @@ public class GameMethods {
 
     public static int countUnitsOfType(UnitType unitType) {
         int total = 0;
-//        for (EnemyBuildingInfo enemyBuildingInfo : UnitCount.getEnemyBuildings().values()) {
-//            if (enemyBuildingInfo.getUnitType() == unitType) {
-//                total++;
-//            }
-//        }
         for(UnitType uT: UnitCount.getEnemyUnitCount().values()) {
             if (uT == unitType) {
                 total++;

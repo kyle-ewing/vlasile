@@ -2,9 +2,7 @@ package vlasile.scouting;
 
 import bwapi.Unit;
 import bwta.BaseLocation;
-import vlasile.Painter;
 import vlasile.Vlasile;
-import vlasile.enemy.EnemyInformation;
 
 public class ScvScout {
     private static Unit scout;

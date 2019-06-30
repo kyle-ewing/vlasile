@@ -1,4 +1,4 @@
-package vlasile.units.unitstatus;
+package vlasile.unitstatus;
 
 public enum ArmyStatus {
     IDLE, MOVE, ATTACK, RETREAT

@@ -3,9 +3,9 @@ package vlasile;
 import bwapi.Color;
 import bwapi.Position;
 import bwapi.Unit;
-import bwapi.UnitType;
-import vlasile.scouting.ScvScout;
-import vlasile.units.unitstatus.WorkerStatus;
+import bwta.BWTA;
+import bwta.Chokepoint;
+import vlasile.unitstatus.WorkerStatus;
 
 import java.util.HashMap;
 
@@ -77,6 +77,12 @@ public class Painter {
                 }
             }
 
+        }
+    }
+
+    public static void paintChoke() {
+        for(Chokepoint choke : BWTA.getChokepoints()) {
+            paintCircle(choke.getCenter(), 48, Color.Cyan);
         }
     }
 
