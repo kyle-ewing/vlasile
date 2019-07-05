@@ -3,6 +3,7 @@ package vlasile;
 import bwapi.Color;
 import bwapi.Position;
 import bwapi.Unit;
+import bwapi.UnitType;
 import bwta.BWTA;
 import bwta.Chokepoint;
 import vlasile.unitstatus.WorkerStatus;
@@ -12,6 +13,13 @@ import java.util.HashMap;
 
 public class Painter {
     static HashMap workers = UnitCount.getWorkers();
+
+    public static void update() {
+        paintWorkers();
+        paintChoke();
+        paintMarines();
+    }
+
 
     public static void paintCircle(Unit unit, int radius, Color color) {
         paintCircle(unit.getPosition(), radius, color);
@@ -54,7 +62,7 @@ public class Painter {
         Vlasile.getBwapi().drawTextMap(position, string);
     }
 
-    public static void paintWorkers() {
+    private static void paintWorkers() {
         for(Unit unit : Vlasile.getSelf().getUnits()) {
             if (unit.getType().isWorker()) {
                 if(workers.get(unit.getID()) == WorkerStatus.MINERALS && unit.canAttack()) {
@@ -80,7 +88,23 @@ public class Painter {
         }
     }
 
-    public static void paintChoke() {
+    private static void paintMarines() {
+        for(Unit unit : Vlasile.getSelf().getUnits()) {
+            if(unit.getType() == UnitType.Terran_Marine && !unit.getType().isBuilding()) {
+                if(unit.isIdle()) {
+                    Painter.paintFilledCircle(unit, 4, Color.White);
+                }
+                else if(unit.isAttacking()) {
+                    Painter.paintFilledCircle(unit, 4, Color.Red);
+                }
+                else if(unit.isMoving()) {
+                    Painter.paintFilledCircle(unit, 4, Color.Purple);
+                }
+            }
+        }
+    }
+
+    private static void paintChoke() {
         for(Chokepoint choke : BWTA.getChokepoints()) {
             paintCircle(choke.getCenter(), 48, Color.Cyan);
         }

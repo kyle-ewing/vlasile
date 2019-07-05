@@ -25,7 +25,7 @@ public class WorkerManager {
             else if(unit.isGatheringGas() && workers.get(unit.getID()) != WorkerStatus.GAS) {
                 workers.put(unit.getID(), WorkerStatus.GAS);
             }
-            else if(unit.getID() == ScvScout.getScout().getID() && workers.get(unit.getID()) != WorkerStatus.SCOUT) {
+            else if(ScvScout.getScout() != null && unit.getID() == ScvScout.getScout().getID() && workers.get(unit.getID()) != WorkerStatus.SCOUT) {
                 workers.put(unit.getID(), WorkerStatus.SCOUT);
             }
             else if(unit.isAttacking() && workers.get(unit.getID()) != WorkerStatus.ATTACK) {
@@ -37,7 +37,6 @@ public class WorkerManager {
             else if(unit.isConstructing() && workers.get(unit.getID()) != WorkerStatus.BUILD) {
                 workers.put(unit.getID(), WorkerStatus.BUILD);
             }
-            Painter.paintWorkers();
         }
     }
 }
