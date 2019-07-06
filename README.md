@@ -11,12 +11,12 @@ Terran bot created as a personal project to test my knowledge and understanding 
 * Construct buildings
 * Create units
 
-###Known Issues
+### Known Issues
 * **Workers assigned to building sometimes don't build**
 * Build hangs up when worker is moving to go build
 * Scout begins to mine enemy minerals and return to enemy base
 
->**build breakers in bold**
+**build breakers in bold**
 
 ### Long Term Goals
 * Create a build order that can defeat the ingame AI for every race
@@ -24,7 +24,7 @@ Terran bot created as a personal project to test my knowledge and understanding 
 * Create a bot good enough to submit to SSCAIT
 
 ### How to use
-Follow set up instructions on the[SSCAIT website](https://sscaitournament.com/index.php?action=tutorial)
+Follow set up instructions on the [SSCAIT website](https://sscaitournament.com/index.php?action=tutorial)
 
 
 
