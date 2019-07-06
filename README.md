@@ -16,7 +16,7 @@ Terran bot created as a personal project to test my knowledge and understanding 
 * Build hangs up when worker is moving to go build
 * Scout begins to mine enemy minerals and return to enemy base
 
-**build breakers in bold**
+######**build breakers in bold**
 
 ### Long Term Goals
 * Create a build order that can defeat the ingame AI for every race
