@@ -1,17 +1,18 @@
-package vlasile.scouting;
+package vlasile;
 
 import bwapi.Position;
 import bwapi.Unit;
 import bwapi.UnitType;
 import bwta.BWTA;
 import bwta.BaseLocation;
-import vlasile.Vlasile;
+import bwta.Chokepoint;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapLocations {
     private static Unit mainBase;
+    private static Chokepoint closestChoke = null;
 
     public static BaseLocation getUnexploredStartingLocation() {
         ArrayList<BaseLocation> startingLocation = new ArrayList<>();
@@ -40,7 +41,6 @@ public class MapLocations {
     }
 
     private static double distanceToBase(Unit base1, Object base2) {
-    	System.out.println("sdfsdfsdf");
         Unit fromUnit = (Unit) base1;
         Unit toUnit = (Unit) base2;
         System.out.println("Distance to base: " + fromUnit.getDistance(toUnit) / 32);
@@ -67,4 +67,30 @@ public class MapLocations {
         }
         return mainBase;
     }
+
+    public static Position getMainBaseLocation() {
+        if(mainBase == null) {
+            setMainBase();
+        }
+        return mainBase.getPosition();
+    }
+
+    public static Position getClosestChoke() {
+        return BWTA.getNearestChokepoint(MapLocations.getMainBaseLocation()).getPoint();
+    }
+
+
+//    public static Chokepoint getClosestChoke(Position position) {
+//        double dist = Double.MAX_VALUE;
+//
+//        for(Chokepoint base : BWTA.getChokepoints()) {
+//            double closetDist = position.getApproxDistance(base.getCenter().getPoint());
+//            System.out.println(closetDist);
+//            if(closestChoke == null || closetDist < dist) {
+//                closestChoke = base;
+//                dist = closetDist;
+//            }
+//        }
+//        return closestChoke;
+//    }
 }

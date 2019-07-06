@@ -4,6 +4,7 @@ import bwapi.*;
 import bwta.BWTA;
 import vlasile.enemy.EnemyInformation;
 import vlasile.enemy.StrategyController;
+import vlasile.managers.SquadManager;
 import vlasile.managers.WorkerManager;
 import vlasile.production.PlannedItem;
 
@@ -83,6 +84,10 @@ public class Vlasile extends DefaultBWListener {
             UnitCount.addFriendlyUnit(unit);
             if(unit.getType().isWorker()) {
                 UnitCount.addWorker(unit);
+            }
+            else if(!unit.getType().isBuilding()) {
+                SquadManager.combatUnitCreated(unit);
+                System.out.println(unit.getType() + " added to squad");
             }
         }
         if(unit.getPlayer() == self && unit.getType().isBuilding()) {

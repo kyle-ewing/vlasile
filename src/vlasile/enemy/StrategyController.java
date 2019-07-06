@@ -36,11 +36,11 @@ public class StrategyController {
         else if (race == 2) {
             TwoRaxAllIn.update();
             defineEnemyZergStrategy();
-            ArmyManager.update();
         }
         else {
             System.out.println("random");
         }
+        ArmyManager.update();
     }
 
     private static void executeBuild() {

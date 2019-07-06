@@ -2,6 +2,7 @@ package vlasile.scouting;
 
 import bwapi.Unit;
 import bwta.BaseLocation;
+import vlasile.MapLocations;
 import vlasile.Vlasile;
 
 public class ScvScout {
