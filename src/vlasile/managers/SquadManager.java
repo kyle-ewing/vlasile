@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SquadManager {
     private static ArrayList<Squad> squads = new ArrayList<>();
-    private static Squad groundArmy = new Squad("Ground");
+    private static Squad bioArmy = new Squad("Bio");
     private static Squad airArmy = new Squad("Air");
 
     public static void combatUnitCreated(Unit unit) {
@@ -16,8 +16,8 @@ public class SquadManager {
             airArmy.getSquadUnits().add(unit);
         }
         else {
-            groundArmy.getSquadUnits().add(unit);
-            unit.move(MapLocations.getClosestChoke());
+            bioArmy.getSquadUnits().add(unit);
+            unit.move(MapLocations.rallyNearMainChoke());
         }
     }
 
@@ -26,7 +26,7 @@ public class SquadManager {
     }
 
     public static Squad getGroundArmy() {
-        return groundArmy;
+        return bioArmy;
     }
 
     public static Squad getAirArmy() {

@@ -76,9 +76,14 @@ public class MapLocations {
     }
 
     public static Position getClosestChoke() {
-        return BWTA.getNearestChokepoint(MapLocations.getMainBaseLocation()).getPoint();
+        return BWTA.getNearestChokepoint(getMainBaseLocation()).getPoint();
     }
 
+    public static Position rallyNearMainChoke() {
+        Chokepoint closestChoke = BWTA.getNearestChokepoint(getMainBaseLocation());
+        Position rallyPoint = new Position((closestChoke.getCenter().getX() + getMainBaseLocation().getX()) / 2, (closestChoke.getCenter().getY() + getMainBaseLocation().getY()) / 2);
+        return rallyPoint;
+    }
 
 //    public static Chokepoint getClosestChoke(Position position) {
 //        double dist = Double.MAX_VALUE;
