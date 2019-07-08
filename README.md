@@ -26,6 +26,8 @@ Terran bot created as a personal project to test my knowledge and understanding 
 ### How to use
 Follow set up instructions on the [SSCAIT website](https://sscaitournament.com/index.php?action=tutorial)
 
+32-bit JRE is required to run bot
+
 
 
 
