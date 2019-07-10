@@ -9,9 +9,11 @@ public class Squad {
     private int squadNumber = squadNumbers++;
     private ArrayList<Unit> squadUnits = new ArrayList<>();
     private String name;
+    private SquadStatus status;
 
     public Squad(String name) {
         this.name = name;
+        this.status = SquadStatus.IDLE;
     }
 
     public Squad(ArrayList<Unit> squadUnits) {
@@ -36,5 +38,13 @@ public class Squad {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public SquadStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(SquadStatus status) {
+        this.status = status;
     }
 }

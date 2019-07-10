@@ -33,7 +33,7 @@ public class UnitCount {
 
     public static void addEnemyBuilding(Unit unit) {
         if(!enemyBuildings.containsKey(unit.getID())) {
-            enemyBuildings.put(unit.getID(), new EnemyBuildingInfo(unit.getType(), unit.getTilePosition()));
+            enemyBuildings.put(unit.getID(), new EnemyBuildingInfo(unit.getType(), unit.getTilePosition(), unit, unit.getPosition()));
         }
         else {
             if(!enemyBuildings.get(unit.getID()).equals(unit.getTilePosition())) {
@@ -48,6 +48,10 @@ public class UnitCount {
             System.out.println("New enemy " + unit.getType() + " found");
         }
 
+    }
+
+    public static void removeEnemyBuilding(Unit unit) {
+        enemyBuildings.remove(unit.getID());
     }
 
     public static void addWorker(Unit unit) {

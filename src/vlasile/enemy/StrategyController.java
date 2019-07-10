@@ -8,6 +8,7 @@ import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.buildorders.TwoRaxAllIn;
 import vlasile.managers.ArmyManager;
+import vlasile.managers.SquadManager;
 import vlasile.production.PlannedItem;
 import vlasile.production.PlannedItemStatus;
 import vlasile.production.PlannedItemType;
@@ -36,6 +37,7 @@ public class StrategyController {
         else if (race == 2) {
             TwoRaxAllIn.update();
             defineEnemyZergStrategy();
+            SquadManager.squadTactics(SquadManager.getBioArmy());
         }
         else {
             System.out.println("random");
