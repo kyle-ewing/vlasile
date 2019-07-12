@@ -2,9 +2,24 @@ package vlasile.enemy;
 
 public class EnemyStrategy {
     private static EnemyStrategy enemyStrategy = null;
+    private String name;
     private boolean rush = false;
     private boolean air = false;
     private boolean expansion = false;
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public EnemyStrategy setName(String name) {
+        this.name = name;
+        return this;
+    }
 
     public static boolean isEnemyStratKnown() {
         return enemyStrategy != null;

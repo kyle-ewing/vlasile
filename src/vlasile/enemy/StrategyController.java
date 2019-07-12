@@ -96,6 +96,7 @@ public class StrategyController {
             }
             else if (race == 2) {
                 TwoRaxAllIn.initializeBuild();
+                EnemyZergStrategy.initialize();
             }
             else {
                 System.out.println("random");
@@ -114,7 +115,7 @@ public class StrategyController {
 
     private static void changeEnemyStrategy(EnemyStrategy strat) {
         if(!EnemyStrategy.isEnemyStratKnown()) {
-            Vlasile.getBwapi().sendText("Enemy strategy: " + strat.toString());
+            Vlasile.getBwapi().sendText("Enemy strategy: " + strat);
         }
         EnemyStrategy.setEnemyStrategy(strat);
     }

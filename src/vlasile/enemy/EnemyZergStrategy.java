@@ -7,6 +7,10 @@ public class EnemyZergStrategy extends EnemyStrategy{
 
     public static final EnemyStrategy _4Pool = new EnemyZergStrategy();
 
+    public static void initialize() {
+        _4Pool.setName("4 Pool");
+    }
+
 
     public static EnemyStrategy detectStrategy() {
         int pool = GameMethods.countUnitsOfType(UnitType.Zerg_Spawning_Pool);
