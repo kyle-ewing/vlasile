@@ -16,7 +16,7 @@ public class EnemyStrategy {
         return name;
     }
 
-    public EnemyStrategy setName(String name) {
+    protected EnemyStrategy setName(String name) {
         this.name = name;
         return this;
     }

@@ -26,7 +26,7 @@ public class MapLocations {
         return null;
     }
 
-    public static List<BaseLocation> getStartingLocations() {
+    private static List<BaseLocation> getStartingLocations() {
         ArrayList<BaseLocation> startingLocations = new ArrayList<>();
         for(BaseLocation baseLocation : BWTA.getBaseLocations()) {
             if(baseLocation.isStartLocation()) {
@@ -68,7 +68,7 @@ public class MapLocations {
         return mainBase;
     }
 
-    public static Position getMainBaseLocation() {
+    private static Position getMainBaseLocation() {
         if(mainBase == null) {
             setMainBase();
         }

@@ -54,7 +54,7 @@ public class SquadManager {
         }
     }
 
-    public static Position getClosestEnemyPos(Unit unit) {
+    private static Position getClosestEnemyPos(Unit unit) {
         Double distanceToClosest = null;
         Position closestPos = null;
         if(!UnitCount.getEnemyBuildings().isEmpty()) {
@@ -82,7 +82,7 @@ public class SquadManager {
         return null;
     }
 
-    public static Unit getClosestEnemyBuilding(Unit unit) {
+    private static Unit getClosestEnemyBuilding(Unit unit) {
         Unit closestEnemy = null;
         Double distanceToClosest = null;
         if(!UnitCount.getEnemyBuildings().isEmpty()) {

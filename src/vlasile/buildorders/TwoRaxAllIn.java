@@ -46,7 +46,7 @@ public class TwoRaxAllIn {
         }
     }
 
-    public static void marines() {
+    private static void marines() {
         uP.buildMarine();
     }
 

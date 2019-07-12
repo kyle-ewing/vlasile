@@ -7,7 +7,6 @@ import vlasile.Painter;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.buildorders.TwoRaxAllIn;
-import vlasile.managers.ArmyManager;
 import vlasile.managers.SquadManager;
 import vlasile.production.PlannedItem;
 import vlasile.production.PlannedItemStatus;
@@ -42,7 +41,6 @@ public class StrategyController {
         else {
             System.out.println("random");
         }
-        ArmyManager.update();
     }
 
     private static void executeBuild() {
@@ -106,7 +104,7 @@ public class StrategyController {
         Painter.drawBuilderText();
     }
 
-    public static void defineEnemyZergStrategy() {
+    private static void defineEnemyZergStrategy() {
         EnemyStrategy definedStrat = EnemyZergStrategy.detectStrategy();
         if(definedStrat != null) {
             changeEnemyStrategy(definedStrat);
