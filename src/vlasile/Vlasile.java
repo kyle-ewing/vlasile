@@ -34,7 +34,7 @@ public class Vlasile extends DefaultBWListener {
 
         //allow user input
         bwapi.enableFlag(1);
-        bwapi.setLocalSpeed(10);
+        bwapi.setLocalSpeed(5);
     }
 
     @Override
@@ -48,11 +48,10 @@ public class Vlasile extends DefaultBWListener {
         if(UnitCount.getUnitCount().containsKey(UnitType.Terran_Marine)) {
             bwapi.drawTextScreen(10,55, "Marine Count: " + UnitCount.getUnitCount().get(UnitType.Terran_Marine));
         }
-
-        Gathering.assignMining();
         StrategyController.CurrentStrat();
-        Painter.update();
         WorkerManager.update();
+        Gathering.assignMining();
+        Painter.update();
     }
 
     @Override
@@ -61,7 +60,7 @@ public class Vlasile extends DefaultBWListener {
             newestBuilding = unit;
 
             for(PlannedItem pi : StrategyController.getPlannedItems()) {
-                if(pi.getID() == null) {
+                if(pi.getID() == 0) {
                     pi.setID(unit.getID());
                     break;
                 }

@@ -73,6 +73,7 @@ public class StrategyController {
                         GameMethods.unreserveResources(pi.getUnitType());
                         System.out.println(pi.getUnitType() + " in progress");
                     }
+
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.IN_PROGRESS) {
                     if (Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType()) {

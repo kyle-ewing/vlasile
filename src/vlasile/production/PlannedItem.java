@@ -15,7 +15,7 @@ public class PlannedItem {
         this.supply = supply;
         this.plannedItemStatus = plannedItemStatus;
         this.plannedItemType = plannedItemType;
-        this.ID = null;
+        this.ID = 0;
     }
 
     public PlannedItem(UnitType unitType, int significance, PlannedItemStatus plannedItemStatus, PlannedItemType plannedItemType, Integer ID) {

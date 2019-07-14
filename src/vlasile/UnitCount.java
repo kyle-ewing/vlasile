@@ -56,7 +56,7 @@ public class UnitCount {
 
     public static void addWorker(Unit unit) {
         if(!workers.containsKey(unit.getID())) {
-            workers.put(unit.getID(), WorkerStatus.MINERALS);
+            workers.put(unit.getID(), WorkerStatus.IDLE);
         }
     }
 

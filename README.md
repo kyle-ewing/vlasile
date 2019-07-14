@@ -13,7 +13,7 @@ Terran bot created as a personal project to test my knowledge and understanding 
 
 ### Known Issues
 * **Workers assigned to building sometimes don't build**
-* Build hangs up when worker is moving to go build
+* ~~Build hangs up when worker is moving to go build~~ (Fixed 7/13/2019)
 * Scout begins to mine enemy minerals and return to enemy base
 
 ###### **build breakers in bold**
