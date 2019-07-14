@@ -8,6 +8,7 @@ Terran bot created as a personal project to test my knowledge and understanding 
 * Establish build order based on enemy race (Zerg only)
 * Scout enemy starting location
 * Basic identification of enemy strategy (Zerg only)
+* Send units to attack enemy base when conditions are right
 * Construct buildings
 * Create units
 
