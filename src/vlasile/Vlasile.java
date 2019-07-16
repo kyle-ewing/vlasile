@@ -121,13 +121,14 @@ public class Vlasile extends DefaultBWListener {
         if(unit.getPlayer() != self) {
             if(!unit.getType().isNeutral()) {
                 UnitCount.addEnemyUnit(unit);
+                GameMethods.updateUnitType(unit);
                 if(unit.getType().isBuilding()) {
                     UnitCount.addEnemyBuilding(unit);
                 }
 
             }
         }
-        GameMethods.updateUnitType(unit);
+
     }
 
     @Override

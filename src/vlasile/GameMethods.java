@@ -4,7 +4,9 @@ import bwapi.Position;
 import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
+import vlasile.enemy.EnemyUnitInfo;
 
+import java.util.Iterator;
 import java.util.Map;
 
 public class GameMethods {
@@ -94,8 +96,11 @@ public class GameMethods {
 
     public static int countUnitsOfType(UnitType unitType) {
         int total = 0;
-        for(UnitType uT: UnitCount.getEnemyUnitCount().values()) {
-            if (uT == unitType) {
+
+        Iterator<EnemyUnitInfo> itr = UnitCount.getEnemyUnitCount().values().iterator();
+        while(itr.hasNext()) {
+            EnemyUnitInfo enemyUnitInfo = itr.next();
+            if(enemyUnitInfo.getUnitType() == unitType) {
                 total++;
             }
         }
@@ -104,11 +109,11 @@ public class GameMethods {
 
     public static void updateUnitType(Unit unit) {
 
-        for(Map.Entry<Integer, UnitType> u : UnitCount.getEnemyUnitCount().entrySet()) {
+        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet()) {
             if(u.getKey() == unit.getID()) {
-                if(u.getValue() != unit.getType()) {
-                    System.out.println("Changed " + u.getValue() + " to " + unit.getType());
-                    u.setValue(unit.getType());
+                if(u.getValue().getUnitType() != unit.getType()) {
+                    System.out.println("Changed " + u.getValue().getUnitType() + " to " + unit.getType());
+                    u.getValue().setUnitType(unit.getType());
                 }
             }
         }

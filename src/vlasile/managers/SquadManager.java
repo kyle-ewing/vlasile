@@ -54,6 +54,10 @@ public class SquadManager {
         }
     }
 
+//    private static Unit attackClosestUnit(Unit unit) {
+//        Double distanceToUnit
+//    }
+
     private static Position getClosestEnemyPos(Unit unit) {
         Double distanceToClosest = null;
         Position closestPos = null;

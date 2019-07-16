@@ -3,6 +3,7 @@ package vlasile;
 import bwapi.Unit;
 import bwapi.UnitType;
 import vlasile.enemy.EnemyBuildingInfo;
+import vlasile.enemy.EnemyUnitInfo;
 import vlasile.unitstatus.WorkerStatus;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 public class UnitCount {
     private static HashMap<UnitType, Integer> unitCount = new HashMap<>();
     private static HashMap<Integer, EnemyBuildingInfo> enemyBuildings = new HashMap<>();
-    private static HashMap<Integer, UnitType> enemyUnitCount = new HashMap<>();
+    private static HashMap<Integer, EnemyUnitInfo> enemyUnitCount = new HashMap<>();
     private static HashMap<Integer, WorkerStatus> workers = new HashMap<>();
 
     public static void addFriendlyUnit(Unit unit) {
@@ -44,7 +45,7 @@ public class UnitCount {
 
     public static void addEnemyUnit(Unit unit) {
         if(!enemyUnitCount.containsKey(unit.getID())) {
-            enemyUnitCount.put(unit.getID(), unit.getType());
+            enemyUnitCount.put(unit.getID(), new EnemyUnitInfo(unit, unit.getType()));
             System.out.println("New enemy " + unit.getType() + " found");
         }
 
@@ -75,7 +76,7 @@ public class UnitCount {
         return enemyBuildings;
     }
 
-    public static HashMap<Integer, UnitType> getEnemyUnitCount() {
+    public static HashMap<Integer, EnemyUnitInfo> getEnemyUnitCount() {
         return enemyUnitCount;
     }
 
