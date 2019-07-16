@@ -43,11 +43,12 @@ public class EnemyInformation {
     }
 
     public static boolean enemyBaseDiscovered() {
-        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet())
-        if(u.getValue().getUnitType() == baseType) {
-            return true;
+        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet()) {
+            if(u.getValue().getUnitType() == baseType) {
+                return true;
+            }
         }
-            return false;
+        return false;
     }
 
     public static Position getEnemyBasePosition() {
