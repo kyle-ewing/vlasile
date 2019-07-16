@@ -123,6 +123,10 @@ public class GameMethods {
         return new Position(position.getX() + X, position.getY() + Y);
     }
 
+    public static double distanceFormula(int curX, int curY, int unitX, int unitY) {
+        return  Math.sqrt(((curX - unitX) * (curX - unitX)) + ((curY - unitY) * (curY - unitY)));
+    }
+
     public static int getReservedMinerals() {
         return reservedMinerals;
     }

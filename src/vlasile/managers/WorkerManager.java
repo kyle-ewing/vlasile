@@ -1,7 +1,6 @@
 package vlasile.managers;
 
 import bwapi.Unit;
-import vlasile.Painter;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.scouting.ScvScout;

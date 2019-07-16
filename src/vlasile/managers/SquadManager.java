@@ -2,7 +2,7 @@ package vlasile.managers;
 
 import bwapi.Position;
 import bwapi.Unit;
-import com.sun.org.apache.bcel.internal.classfile.Unknown;
+import vlasile.GameMethods;
 import vlasile.MapLocations;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
@@ -54,8 +54,17 @@ public class SquadManager {
         }
     }
 
-//    private static Unit attackClosestUnit(Unit unit) {
-//        Double distanceToUnit
+//    private static Unit getClosestUnit(Unit unit) {
+//        Double distanceToUnit = null;
+//        Unit closestUnit = null;
+//        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet()) {
+//            Unit currentClosest = u.getValue().getUnitActual();
+//
+//            if(closestUnit == null) {
+//                closestUnit = currentClosest;
+//                distanceToUnit = GameMethods.distanceFormula(currentClosest.getX(), currentClosest.getY(), unit.getX(), unit.getY());
+//            }
+//        }
 //    }
 
     private static Position getClosestEnemyPos(Unit unit) {
@@ -68,12 +77,13 @@ public class SquadManager {
                 EnemyBuildingInfo enemyBuildingInfo = itr.next();
                 Position currentPos = enemyBuildingInfo.getPosition();
 
+
                 if(closestPos == null) {
                     closestPos = currentPos;
-                    distanceToClosest = Math.sqrt(((currentPos.getX() - unit.getX()) * (currentPos.getX() - unit.getX())) + ((currentPos.getY() - unit.getY()) * (currentPos.getY() - unit.getY())));
+                    distanceToClosest = GameMethods.distanceFormula(currentPos.getX(), currentPos.getY(), unit.getX(), unit.getY());
                 }
                 else {
-                    Double distanceToCurrent = Math.sqrt(((currentPos.getX() - unit.getX()) * (currentPos.getX() - unit.getX())) + ((currentPos.getY() - unit.getY()) * (currentPos.getY() - unit.getY())));
+                    Double distanceToCurrent = GameMethods.distanceFormula(currentPos.getX(), currentPos.getY(), unit.getX(), unit.getY());
 
                     if(distanceToCurrent < distanceToClosest) {
                         closestPos = currentPos;
@@ -99,10 +109,10 @@ public class SquadManager {
 
                 if(closestEnemy == null) {
                     closestEnemy = currentEnemy;
-                    distanceToClosest = Math.sqrt(((currentPos.getY() - unit.getY()) * (currentPos.getY() - unit.getY())) + ((currentPos.getY() - unit.getY()) * (currentPos.getY() - unit.getY())));
+                    distanceToClosest = GameMethods.distanceFormula(currentPos.getX(), currentPos.getY(), unit.getX(), unit.getY());
                 }
                 else {
-                    Double distanceToCurrent = Math.sqrt(((currentPos.getY() - unit.getY()) * (currentPos.getY() - unit.getY())) + ((currentPos.getY() - unit.getY()) * (currentPos.getY() - unit.getY())));
+                    Double distanceToCurrent = GameMethods.distanceFormula(currentPos.getX(), currentPos.getY(), unit.getX(), unit.getY());
 
                     if(distanceToCurrent < distanceToClosest) {
                         closestEnemy = currentEnemy;

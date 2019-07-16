@@ -1,18 +1,19 @@
 package vlasile.enemy;
 
-import bwapi.*;
+import bwapi.Player;
+import bwapi.Position;
+import bwapi.Race;
+import bwapi.UnitType;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Map;
 
 public class EnemyInformation {
 
     private static Integer race = null;
     private static Player _enemy = null;
     private static UnitType baseType;
-    private static HashMap enemyBuildings = UnitCount.getEnemyUnitCount();
 
     public static void getEnemyRace() {
         if(race == null) {
@@ -42,7 +43,8 @@ public class EnemyInformation {
     }
 
     public static boolean enemyBaseDiscovered() {
-        if(enemyBuildings.containsValue(baseType)) {
+        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet())
+        if(u.getValue().getUnitType() == baseType) {
             return true;
         }
             return false;
