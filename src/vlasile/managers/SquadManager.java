@@ -36,6 +36,18 @@ public class SquadManager {
         }
     }
 
+    public static void combatUnitRemoved(Unit unit) {
+        if(unit.getType().isFlyer()) {
+            airArmy.getSquadUnits().remove(unit);
+        }
+        else if(unit.getType().isMechanical() && !unit.getType().isFlyer()) {
+            mechArmy.getSquadUnits().remove(unit);
+        }
+        else {
+            bioArmy.getSquadUnits().remove(unit);
+        }
+    }
+
     public static void squadTactics(Squad squad) {
         if(!squad.getSquadUnits().isEmpty()) {
             if(squad.getStatus() == SquadStatus.ATTACKING) {

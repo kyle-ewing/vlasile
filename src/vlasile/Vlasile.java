@@ -108,6 +108,7 @@ public class Vlasile extends DefaultBWListener {
             if(unit.getType().isWorker()) {
                 UnitCount.removeWorker(unit);
             }
+            SquadManager.combatUnitRemoved(unit);
         }
         else {
             if(unit.getType().isBuilding()) {
