@@ -51,6 +51,12 @@ public class UnitCount {
 
     }
 
+    public static void removeEnemyUnit(Unit unit) {
+        if(enemyUnitCount.containsKey(unit.getID())) {
+            enemyUnitCount.remove(unit.getID());
+        }
+    }
+
     public static void removeEnemyBuilding(Unit unit) {
         enemyBuildings.remove(unit.getID());
     }

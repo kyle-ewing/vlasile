@@ -6,6 +6,8 @@ import bwapi.Unit;
 import bwapi.UnitType;
 import bwta.BWTA;
 import bwta.Chokepoint;
+import vlasile.managers.SquadManager;
+import vlasile.squads.Squad;
 import vlasile.unitstatus.WorkerStatus;
 
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class Painter {
         paintWorkers();
         paintChoke();
         paintMarines();
+        drawAttackLine();
     }
 
 
@@ -116,5 +119,17 @@ public class Painter {
                 drawUnitText(unit.getPosition(), "Builder");
             }
         }
+    }
+
+    private static void drawAttackLine() {
+        Squad squad = SquadManager.getBioArmy();
+        if(!(squad.getSquadUnits().isEmpty())) {
+            for(Unit unit : squad.getSquadUnits()) {
+                if(SquadManager.getClosestUnit(unit).getPosition().isValid()) {
+                    Vlasile.getBwapi().drawLineMap(unit.getPosition(), SquadManager.getClosestUnit(unit).getPosition(), Color.Teal);
+                }
+            }
+        }
+
     }
 }

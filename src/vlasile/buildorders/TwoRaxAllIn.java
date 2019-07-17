@@ -40,9 +40,9 @@ public class TwoRaxAllIn {
             if(quota()) {
                 SquadManager.getBioArmy().setStatus(SquadStatus.ATTACKING);
             }
-            else {
-                SquadManager.getBioArmy().setStatus(SquadStatus.RETREATING);
-            }
+//            else {
+//                SquadManager.getBioArmy().setStatus(SquadStatus.RETREATING);
+//            }
         }
     }
 

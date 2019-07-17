@@ -2,17 +2,20 @@ package vlasile.managers;
 
 import bwapi.Position;
 import bwapi.Unit;
+import bwapi.UnitType;
 import vlasile.GameMethods;
 import vlasile.MapLocations;
 import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.enemy.EnemyBuildingInfo;
 import vlasile.enemy.EnemyInformation;
+import vlasile.enemy.EnemyUnitInfo;
 import vlasile.squads.Squad;
 import vlasile.squads.SquadStatus;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 public class SquadManager {
     private static ArrayList<Squad> squads = new ArrayList<>();
@@ -40,11 +43,16 @@ public class SquadManager {
                     for(Unit unit : squad.getSquadUnits()) {
                         if(Vlasile.getFrameCount() % 30 == 0) {
                             if(!(unit.isAttacking() || unit.isStartingAttack() || unit.isAttackFrame())) {
-                                if(getClosestEnemyBuilding(unit).getPosition().isValid()) {
-                                    unit.attack(getClosestEnemyBuilding(unit));
+                                if(enemyArmyVisible()) {
+                                    unit.attack(getClosestUnit(unit));
                                 }
                                 else {
-                                    unit.attack(getClosestEnemyPos(unit));
+                                    if(getClosestEnemyBuilding(unit).getPosition().isValid()) {
+                                        unit.attack(getClosestEnemyBuilding(unit));
+                                    }
+                                    else {
+                                        unit.attack(getClosestEnemyPos(unit));
+                                    }
                                 }
                             }
                         }
@@ -54,20 +62,33 @@ public class SquadManager {
         }
     }
 
-//    private static Unit getClosestUnit(Unit unit) {
-//        Double distanceToUnit = null;
-//        Unit closestUnit = null;
-//        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet()) {
-//            Unit currentClosest = u.getValue().getUnitActual();
-//
-//            if(closestUnit == null) {
-//                closestUnit = currentClosest;
-//                distanceToUnit = GameMethods.distanceFormula(currentClosest.getX(), currentClosest.getY(), unit.getX(), unit.getY());
-//            }
-//        }
-//    }
+    public static Unit getClosestUnit(Unit unit) {
+        Double distanceToUnit = null;
+        Unit closestUnit = null;
+        for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet()) {
+            Unit currentClosest = u.getValue().getUnitActual();
 
-    private static Position getClosestEnemyPos(Unit unit) {
+            if((currentClosest.getType().isBuilding() && !(u.getValue().getUnitType().canAttack())) || currentClosest.getType().isWorker() || currentClosest.getType() == UnitType.Zerg_Larva || currentClosest.getType() == UnitType.Zerg_Egg || currentClosest.getType() == UnitType.Zerg_Overlord) {
+                continue;
+            }
+
+            if(closestUnit == null) {
+                closestUnit = currentClosest;
+                distanceToUnit = GameMethods.distanceFormula(currentClosest.getX(), currentClosest.getY(), unit.getX(), unit.getY());
+            }
+            else {
+                Double distanceToCurrent = GameMethods.distanceFormula(currentClosest.getX(), currentClosest.getY(), unit.getX(), unit.getY());
+
+                if(distanceToCurrent < distanceToUnit) {
+                    closestUnit = currentClosest;
+                    distanceToUnit = distanceToCurrent;
+                }
+            }
+        }
+        return closestUnit;
+    }
+
+    public static Position getClosestEnemyPos(Unit unit) {
         Double distanceToClosest = null;
         Position closestPos = null;
         if(!UnitCount.getEnemyBuildings().isEmpty()) {
@@ -96,7 +117,7 @@ public class SquadManager {
         return null;
     }
 
-    private static Unit getClosestEnemyBuilding(Unit unit) {
+    public static Unit getClosestEnemyBuilding(Unit unit) {
         Unit closestEnemy = null;
         Double distanceToClosest = null;
         if(!UnitCount.getEnemyBuildings().isEmpty()) {
@@ -123,6 +144,20 @@ public class SquadManager {
 
         }
         return null;
+    }
+
+    private static boolean enemyArmyVisible() {
+        for(Map.Entry<Integer, EnemyUnitInfo> unit : UnitCount.getEnemyUnitCount().entrySet()) {
+            if((unit.getValue().getUnitType().isBuilding() && !(unit.getValue().getUnitType().canAttack())) || unit.getValue().getUnitType().isWorker() || unit.getValue().getUnitType() == UnitType.Zerg_Overlord || unit.getValue().getUnitType() == UnitType.Zerg_Egg || unit.getValue().getUnitType() == UnitType.Zerg_Larva) {
+                continue;
+            }
+            else {
+                if(unit.getValue().getUnitActual().getPosition().isValid()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static ArrayList<Squad> getSquads() {

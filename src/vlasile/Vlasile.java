@@ -113,6 +113,7 @@ public class Vlasile extends DefaultBWListener {
             if(unit.getType().isBuilding()) {
                 UnitCount.removeEnemyBuilding(unit);
             }
+            UnitCount.removeEnemyUnit(unit);
         }
     }
 
