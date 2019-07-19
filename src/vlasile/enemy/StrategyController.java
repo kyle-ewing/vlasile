@@ -8,10 +8,7 @@ import vlasile.UnitCount;
 import vlasile.Vlasile;
 import vlasile.buildorders.TwoRaxAllIn;
 import vlasile.managers.SquadManager;
-import vlasile.production.PlannedItem;
-import vlasile.production.PlannedItemStatus;
-import vlasile.production.PlannedItemType;
-import vlasile.production.WorkerProduction;
+import vlasile.production.*;
 import vlasile.scouting.ScvScout;
 import vlasile.unitstatus.WorkerStatus;
 
@@ -36,7 +33,7 @@ public class StrategyController {
         else if (race == 2) {
             TwoRaxAllIn.update();
             defineEnemyZergStrategy();
-            SquadManager.squadTactics(SquadManager.getBioArmy());
+            //SquadManager.squadTactics(SquadManager.getBioArmy());
         }
         else {
             System.out.println("random");
@@ -76,7 +73,7 @@ public class StrategyController {
 
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.IN_PROGRESS) {
-                    if (Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType()) {
+                    if (Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType() && Vlasile.getNewestFinishedBuilding().getID() == pi.getID()) {
                         pi.setPlannedItemStatus(PlannedItemStatus.COMPLETE);
                     }
                 }
@@ -102,6 +99,7 @@ public class StrategyController {
             }
             isInitialized = true;
         }
+        UnplannedBuildings.addDepotToQueue();
         Painter.drawBuilderText();
     }
 
