@@ -3,6 +3,7 @@ package vlasile.production;
 import bwapi.Game;
 import bwapi.UnitType;
 import vlasile.GameMethods;
+import vlasile.enemy.EnemyStrategy;
 import vlasile.enemy.StrategyController;
 
 import java.util.ArrayList;
@@ -10,10 +11,16 @@ import java.util.ArrayList;
 public class UnplannedBuildings {
     private static int freeSupply;
     private static int totalSupply;
+    private static boolean initializeResponse = false;
+    private static ArrayList<PlannedItem> plannedItems = StrategyController.getPlannedItems();
 
-    public static void addDepotToQueue() {
+    public static void update() {
+        addDepotToQueue();
+        earlyGameResponse();
+    }
+
+    private static void addDepotToQueue() {
         totalSupply = GameMethods.getSuppyTotal();
-        ArrayList<PlannedItem> plannedItems = StrategyController.getPlannedItems();
 
         if(!depotInQueue()) {
             freeSupply = GameMethods.getFreeSupply();
@@ -53,5 +60,16 @@ public class UnplannedBuildings {
             }
         }
         return false;
+    }
+
+    private static void earlyGameResponse() {
+        if(!initializeResponse) {
+            if(EnemyStrategy.getEnemyStrategy() != null) {
+                if(EnemyStrategy.getEnemyStrategy().getName().equals("4 Pool")) {
+                  plannedItems.add(new PlannedItem(UnitType.Terran_Bunker, 0, PlannedItemStatus.NOT_STARTED, PlannedItemType.BUILDING));
+                }
+                initializeResponse = true;
+            }
+        }
     }
 }

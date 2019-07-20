@@ -33,11 +33,12 @@ public class StrategyController {
         else if (race == 2) {
             TwoRaxAllIn.update();
             defineEnemyZergStrategy();
-            //SquadManager.squadTactics(SquadManager.getBioArmy());
+            SquadManager.squadTactics(SquadManager.getBioArmy());
         }
         else {
             System.out.println("random");
         }
+        UnplannedBuildings.update();
     }
 
     private static void executeBuild() {
@@ -47,30 +48,33 @@ public class StrategyController {
                     if (pi.getSupply() <= GameMethods.getSupplyUsed()) {
                         if (GameMethods.getAvailableMinerals() >= pi.getUnitType().mineralPrice()) {
                             if (pi.getPlannedItemType() == PlannedItemType.BUILDING) {
-                                for (Unit worker : Vlasile.getSelf().getUnits()) {
-                                    if (worker.getType().isWorker() && worker.isGatheringMinerals() && ScvScout.getScout() != worker) {
-                                        GameMethods.reserveResources(pi.getUnitType());
-                                        System.out.println(GameMethods.getReservedMinerals() + " minerals reserved, " + GameMethods.getAvailableMinerals() + " available");
-                                        TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
-                                        worker.build(pi.getUnitType(), plannedPosition);
-                                        UnitCount.getWorkers().put(worker.getID(), WorkerStatus.BUILD);
-                                        pi.setPlannedItemStatus(PlannedItemStatus.SCV_ASSIGNED);
-                                        System.out.println("SCV assigned to build: " + pi.getUnitType());
-                                        break;
+                                if(BuildingRequirements.meetsReq(pi.getUnitType())) {
+                                    for (Unit worker : Vlasile.getSelf().getUnits()) {
+                                        if (worker.getType().isWorker() && worker.isGatheringMinerals() && ScvScout.getScout() != worker) {
+                                            GameMethods.reserveResources(pi.getUnitType());
+                                            System.out.println(GameMethods.getReservedMinerals() + " minerals reserved, " + GameMethods.getAvailableMinerals() + " available");
+                                            TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
+                                            worker.build(pi.getUnitType(), plannedPosition);
+                                            UnitCount.getWorkers().put(worker.getID(), WorkerStatus.BUILD);
+                                            System.out.println(worker.getID() + " ID");
+                                            pi.setPlannedItemStatus(PlannedItemStatus.SCV_ASSIGNED);
+                                            System.out.println("SCV assigned to build: " + pi.getUnitType());
+                                            break;
+                                        }
                                     }
                                 }
-
                             }
                         }
                     }
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.SCV_ASSIGNED) {
-                    if (Vlasile.getNewestBuilding().getID() == pi.getID()) {
-                        pi.setPlannedItemStatus(PlannedItemStatus.IN_PROGRESS);
-                        GameMethods.unreserveResources(pi.getUnitType());
-                        System.out.println(pi.getUnitType() + " in progress");
+                    if(pi.getUnitType() == Vlasile.getNewestBuilding().getType()) {
+                        if (Vlasile.getNewestBuilding().getID() == pi.getID()) {
+                            pi.setPlannedItemStatus(PlannedItemStatus.IN_PROGRESS);
+                            GameMethods.unreserveResources(pi.getUnitType());
+                            System.out.println(pi.getUnitType() + " in progress");
+                        }
                     }
-
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.IN_PROGRESS) {
                     if (Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType() && Vlasile.getNewestFinishedBuilding().getID() == pi.getID()) {
@@ -99,7 +103,6 @@ public class StrategyController {
             }
             isInitialized = true;
         }
-        UnplannedBuildings.addDepotToQueue();
         Painter.drawBuilderText();
     }
 

@@ -132,4 +132,12 @@ public class Painter {
         }
 
     }
+
+    public static void drawBuilderID() {
+        for(Unit unit : Vlasile.getSelf().getUnits()) {
+            if(unit.getType().isWorker()) {
+                drawUnitText(unit.getPosition(), Integer.toString(unit.getID()));
+            }
+        }
+    }
 }

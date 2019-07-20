@@ -51,6 +51,7 @@ public class Vlasile extends DefaultBWListener {
         StrategyController.CurrentStrat();
         WorkerManager.update();
         Gathering.assignMining();
+        Painter.drawBuilderID();
         Painter.update();
     }
 
@@ -60,9 +61,11 @@ public class Vlasile extends DefaultBWListener {
             newestBuilding = unit;
 
             for(PlannedItem pi : StrategyController.getPlannedItems()) {
-                if(pi.getID() == 0) {
-                    pi.setID(unit.getID());
-                    break;
+                if(pi.getUnitType() == unit.getType()) {
+                    if(pi.getID() == 0) {
+                        pi.setID(unit.getID());
+                        break;
+                    }
                 }
             }
 
