@@ -66,6 +66,10 @@ public class GameMethods {
                     return n.getTilePosition();
             }
         }
+        else if(buildingType == UnitType.Terran_Bunker) {
+            Position bunkerLocation = MapLocations.bunkerPosition();
+            return bunkerLocation.toTilePosition();
+        }
 
         while ((maxDist < stopDist) && (ret == null)) {
             for (int i = aroundTile.getX() - maxDist; i <= aroundTile.getX() + maxDist; i++) {

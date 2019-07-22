@@ -1,5 +1,6 @@
 package vlasile;
 
+import bwapi.AbstractPoint;
 import bwapi.Position;
 import bwapi.Unit;
 import bwapi.UnitType;
@@ -76,13 +77,28 @@ public class MapLocations {
     }
 
     public static Position getClosestChoke() {
-        return BWTA.getNearestChokepoint(getMainBaseLocation()).getPoint();
+        return BWTA.getNearestChokepoint(getMainBaseLocation()).getCenter();
     }
 
     public static Position rallyNearMainChoke() {
         Chokepoint closestChoke = BWTA.getNearestChokepoint(getMainBaseLocation());
         Position rallyPoint = new Position((closestChoke.getCenter().getX() + getMainBaseLocation().getX()) / 2, (closestChoke.getCenter().getY() + getMainBaseLocation().getY()) / 2);
         return rallyPoint;
+    }
+
+//    public static Position translatePositionByPercent(Position from, Position to, double percent) {
+//        int newX = (int) ((100 - percent) * from.getX() + percent * to.getX()) / 100;
+//        int newY = (int) ((100 - percent) * from.getY() + percent * to.getY()) / 100;
+//        return new Position(newX, newY);
+//    }
+
+    public static Position bunkerPosition() {
+        Chokepoint closestChoke = BWTA.getNearestChokepoint(getMainBaseLocation());
+        int posX = (((closestChoke.getCenter().getX() + getMainBaseLocation().getX()) / 2) + closestChoke.getCenter().getX()) / 2;
+        //posX = (closestChoke.getCenter().getX() + posX) / 2;
+        int posY =  (((closestChoke.getCenter().getY() + getMainBaseLocation().getY()) / 2) + closestChoke.getCenter().getY()) / 2;
+        //posY =  (closestChoke.getCenter().getY() + posY) / 2;
+        return new Position(posX, posY);
     }
 
 //    public static Chokepoint getClosestChoke(Position position) {

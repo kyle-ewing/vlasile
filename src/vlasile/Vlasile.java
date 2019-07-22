@@ -51,7 +51,6 @@ public class Vlasile extends DefaultBWListener {
         StrategyController.CurrentStrat();
         WorkerManager.update();
         Gathering.assignMining();
-        Painter.drawBuilderID();
         Painter.update();
     }
 

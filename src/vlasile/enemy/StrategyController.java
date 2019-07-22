@@ -56,7 +56,6 @@ public class StrategyController {
                                             TilePosition plannedPosition = GameMethods.getBuildTile(worker, pi.getUnitType(), Vlasile.getSelf().getStartLocation());
                                             worker.build(pi.getUnitType(), plannedPosition);
                                             UnitCount.getWorkers().put(worker.getID(), WorkerStatus.BUILD);
-                                            System.out.println(worker.getID() + " ID");
                                             pi.setPlannedItemStatus(PlannedItemStatus.SCV_ASSIGNED);
                                             System.out.println("SCV assigned to build: " + pi.getUnitType());
                                             break;
