@@ -19,6 +19,7 @@ public class GameMethods {
     public GameMethods() {
     }
 
+    //Convert framecount to seconds
     public static int getSeconds() {
         return Vlasile.getFrameCount() / 30;
     }
@@ -35,6 +36,7 @@ public class GameMethods {
         return getSuppyTotal() - getSupplyUsed();
     }
 
+    //"Reserves" minerals/gas when a building is queued up
     public static void reserveResources(UnitType unitType) {
         reservedMinerals += unitType.mineralPrice();
         reservedGas += unitType.gasPrice();
@@ -43,6 +45,7 @@ public class GameMethods {
         isReserved = true;
     }
 
+    //"Unreserves" minerals/gas when building is physically placed
     public static void unreserveResources(UnitType unitType) {
         reservedMinerals -= unitType.mineralPrice();
         reservedGas -= unitType.gasPrice();
@@ -51,6 +54,7 @@ public class GameMethods {
         isReserved = false;
     }
 
+    //Finds tile location to place buildings and refineries (credit JumpyDoggoBot/Sonko Magnus)
     public static TilePosition getBuildTile(Unit builder, UnitType buildingType, TilePosition aroundTile) {
         TilePosition ret = null;
         int maxDist = 3;
@@ -98,6 +102,7 @@ public class GameMethods {
         return ret;
     }
 
+    //Check total number of a certain enemy unit type
     public static int countUnitsOfType(UnitType unitType) {
         int total = 0;
 
@@ -111,6 +116,7 @@ public class GameMethods {
         return total;
     }
 
+    //Updates unit type if mismatch is found (Ex: Zerg units morphing)
     public static void updateUnitType(Unit unit) {
 
         for(Map.Entry<Integer, EnemyUnitInfo> u : UnitCount.getEnemyUnitCount().entrySet()) {

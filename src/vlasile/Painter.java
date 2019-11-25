@@ -12,6 +12,7 @@ import vlasile.unitstatus.WorkerStatus;
 
 import java.util.HashMap;
 
+//Painter methods to help with debugging
 
 public class Painter {
     static HashMap workers = UnitCount.getWorkers();

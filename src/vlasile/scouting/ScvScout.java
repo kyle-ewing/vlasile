@@ -17,6 +17,7 @@ public class ScvScout {
 
     }
 
+    //Search starting locations for enemy base
     private static void findEnemyBase(Unit scout) {
         BaseLocation startingLocation = MapLocations.getUnexploredStartingLocation();
 
@@ -30,6 +31,7 @@ public class ScvScout {
         }
     }
 
+    //Assign a random scv as a scout
     private static Unit assignScout() {
         for(Unit u : Vlasile.getSelf().getUnits()) {
             if(u.getType().isWorker() && u.isGatheringMinerals()) {

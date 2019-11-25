@@ -11,6 +11,8 @@ import bwta.Chokepoint;
 import java.util.ArrayList;
 import java.util.List;
 
+//Contains all methods where map information is required (Ex: Starting locations, chokepoints)
+
 public class MapLocations {
     private static Unit mainBase;
     private static Chokepoint closestChoke = null;
@@ -92,6 +94,7 @@ public class MapLocations {
 //        return new Position(newX, newY);
 //    }
 
+    //Use the midpoint of the midpoint from the main base to the closest chokepoint to rally units
     public static Position bunkerPosition() {
         Chokepoint closestChoke = BWTA.getNearestChokepoint(getMainBaseLocation());
         int posX = (((closestChoke.getCenter().getX() + getMainBaseLocation().getX()) / 2) + closestChoke.getCenter().getX()) / 2;

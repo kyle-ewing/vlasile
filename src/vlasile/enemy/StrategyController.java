@@ -14,16 +14,20 @@ import vlasile.unitstatus.WorkerStatus;
 
 import java.util.ArrayList;
 
+//Class that controls what strategy is going to be used, and implementing the build order within that strategy
+
 public class StrategyController {
 
     private static Integer race = EnemyInformation.getRace();
     private static boolean isInitialized = false;
     private static ArrayList<PlannedItem> plannedItems = new ArrayList<>();
 
+    //Primary method for running all production and strategy logic
     public static void CurrentStrat() {
         executeBuild();
         WorkerProduction.buildScv();
 
+        //Currently only have a strategy for zerg
         if (race == 0) {
             System.out.println("terran");
         }
@@ -41,6 +45,8 @@ public class StrategyController {
         UnplannedBuildings.update();
     }
 
+    //Executes build order contained in the plannedItems list based on enum state
+    //***move this to a class that makes sense
     private static void executeBuild() {
         if (isInitialized) {
             for (PlannedItem pi : plannedItems) {
@@ -112,6 +118,7 @@ public class StrategyController {
         }
     }
 
+    //Send text in game when the enemy strategy is found (4 pool only currently)
     private static void changeEnemyStrategy(EnemyStrategy strat) {
         if(!EnemyStrategy.isEnemyStratKnown()) {
             Vlasile.getBwapi().sendText("Enemy strategy: " + strat);

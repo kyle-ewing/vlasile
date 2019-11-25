@@ -2,6 +2,8 @@ package vlasile.production;
 
 import bwapi.UnitType;
 
+//Object that is used in the build order list
+
 public class PlannedItem {
     private UnitType unitType;
     private Integer supply = 0;

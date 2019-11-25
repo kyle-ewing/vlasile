@@ -23,6 +23,7 @@ public class SquadManager {
     private static Squad mechArmy = new Squad("Mech");
     private static Squad airArmy = new Squad("Air");
 
+    //Add unit to squad on creation
     public static void combatUnitCreated(Unit unit) {
         if(unit.getType().isFlyer()) {
             airArmy.getSquadUnits().add(unit);
@@ -36,6 +37,7 @@ public class SquadManager {
         }
     }
 
+    //Remove squad unit on death
     public static void combatUnitRemoved(Unit unit) {
         if(unit.getType().isFlyer()) {
             airArmy.getSquadUnits().remove(unit);
@@ -48,6 +50,7 @@ public class SquadManager {
         }
     }
 
+    //Primary method for controlling squad status and behavior
     public static void squadTactics(Squad squad) {
         if(!squad.getSquadUnits().isEmpty()) {
             if(squad.getStatus() == SquadStatus.ATTACKING) {
@@ -74,6 +77,7 @@ public class SquadManager {
         }
     }
 
+    //Uses distance formula to find the closest enemy unit to each individual friendly unit. Only used when enemy units are visible to player
     public static Unit getClosestUnit(Unit unit) {
         Double distanceToUnit = null;
         Unit closestUnit = null;
@@ -100,6 +104,7 @@ public class SquadManager {
         return closestUnit;
     }
 
+    //Uses distance formula to find the closest enemy unit to each individual friendly unit. Only used when no enemy units are visible
     public static Position getClosestEnemyPos(Unit unit) {
         Double distanceToClosest = null;
         Position closestPos = null;
@@ -129,6 +134,7 @@ public class SquadManager {
         return null;
     }
 
+    //Uses distance formula to find closest enemy building to squad
     public static Unit getClosestEnemyBuilding(Unit unit) {
         Unit closestEnemy = null;
         Double distanceToClosest = null;
@@ -158,6 +164,7 @@ public class SquadManager {
         return null;
     }
 
+    //Checks if any enemy units are visible to the player
     private static boolean enemyArmyVisible() {
         for(Map.Entry<Integer, EnemyUnitInfo> unit : UnitCount.getEnemyUnitCount().entrySet()) {
             if((unit.getValue().getUnitType().isBuilding() && !(unit.getValue().getUnitType().canAttack())) || unit.getValue().getUnitType().isWorker() || unit.getValue().getUnitType() == UnitType.Zerg_Overlord || unit.getValue().getUnitType() == UnitType.Zerg_Egg || unit.getValue().getUnitType() == UnitType.Zerg_Larva) {

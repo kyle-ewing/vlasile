@@ -8,6 +8,8 @@ import vlasile.enemy.StrategyController;
 
 import java.util.ArrayList;
 
+//Class containing any methods involving building creation that don't originate in the initial build order
+
 public class UnplannedBuildings {
     private static int freeSupply;
     private static int totalSupply;
@@ -19,6 +21,7 @@ public class UnplannedBuildings {
         earlyGameResponse();
     }
 
+    //Queue additional supply depots when there are none currently in the build queue, and also a certain supply threshold is met
     private static void addDepotToQueue() {
         totalSupply = GameMethods.getSuppyTotal();
 
@@ -62,6 +65,7 @@ public class UnplannedBuildings {
         return false;
     }
 
+    //Add a bunker to built as soon as possible if the enemy is 4 pooling
     private static void earlyGameResponse() {
         if(!initializeResponse) {
             if(EnemyStrategy.getEnemyStrategy() != null) {

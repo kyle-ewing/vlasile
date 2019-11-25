@@ -5,9 +5,12 @@ import vlasile.UnitCount;
 
 import java.util.HashMap;
 
+//Requirements list for all structures for the Terran Race
+
 public class BuildingRequirements {
     private static HashMap<UnitType, Integer> unitCount = UnitCount.getUnitCount();
 
+    //Checks if the player has the proper buildings to add to the build queue
     public static boolean meetsReq(UnitType unitType) {
         if(unitType == UnitType.Terran_Command_Center) {
             return true;

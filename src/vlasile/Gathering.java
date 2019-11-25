@@ -8,6 +8,8 @@ public class Gathering {
     private static Player self = Vlasile.getSelf();
     private static Game game = Vlasile.getBwapi();
 
+    //Credit: JumpyDoggoBot/SonkoMagnus
+    //Find the cloest mineral patch the scv and mine it
     public static void assignMining() {
         for(Unit myUnit : self.getUnits()) {
             if(myUnit.getType().isWorker()) {

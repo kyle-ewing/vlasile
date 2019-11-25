@@ -11,7 +11,7 @@ public class EnemyZergStrategy extends EnemyStrategy{
         _4Pool.setName("4 Pool");
     }
 
-
+    //Assess enemy buildings/units/time passed to determine their strategy
     public static EnemyStrategy detectStrategy() {
         int pool = GameMethods.countUnitsOfType(UnitType.Zerg_Spawning_Pool);
         int spire = GameMethods.countUnitsOfType(UnitType.Zerg_Spire);
