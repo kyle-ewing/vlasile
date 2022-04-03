@@ -5,6 +5,7 @@ import bwapi.Position;
 import bwapi.Unit;
 import bwapi.UnitType;
 import bwta.BWTA;
+import bwta.BaseLocation;
 import bwta.Chokepoint;
 import vlasile.managers.SquadManager;
 import vlasile.squads.Squad;
@@ -22,6 +23,7 @@ public class Painter {
         paintChoke();
         paintMarines();
         drawAttackLine();
+        paintPatches();
     }
 
 
@@ -111,6 +113,12 @@ public class Painter {
     private static void paintChoke() {
         for(Chokepoint choke : BWTA.getChokepoints()) {
             paintCircle(choke.getCenter(), 48, Color.Cyan);
+        }
+    }
+
+    private static void paintPatches() {
+        for(BaseLocation base : BWTA.getBaseLocations()) {
+            paintCircle(base.getPosition(), 36, Color.Purple);
         }
     }
 

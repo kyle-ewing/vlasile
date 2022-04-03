@@ -9,13 +9,13 @@ import vlasile.unitstatus.WorkerStatus;
 import java.util.HashMap;
 
 public class WorkerManager {
+    private static HashMap workers = UnitCount.getWorkers();
 
     public static void update() {
         workerStatus();
     }
 
     private static void workerStatus() {
-        HashMap workers = UnitCount.getWorkers();
 
         for(Unit unit : Vlasile.getSelf().getUnits()) {
             if(unit.isGatheringMinerals() && workers.get(unit.getID()) != WorkerStatus.MINERALS) {

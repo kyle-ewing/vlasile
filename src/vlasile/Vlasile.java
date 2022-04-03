@@ -8,6 +8,7 @@ import vlasile.managers.SquadManager;
 import vlasile.managers.WorkerManager;
 import vlasile.production.PlannedItem;
 
+
 public class Vlasile extends DefaultBWListener {
 
     private static Vlasile instance;
@@ -81,7 +82,7 @@ public class Vlasile extends DefaultBWListener {
     @Override
     public void onUnitComplete(Unit unit) {
         if(unit.getPlayer() == self) {
-            System.out.println("Finished Units: " + unit.getType());
+            //System.out.println("Finished Units: " + unit.getType());
             UnitCount.addFriendlyUnit(unit);
             if(unit.getType().isWorker()) {
                 UnitCount.addWorker(unit);

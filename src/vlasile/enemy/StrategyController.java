@@ -73,13 +73,25 @@ public class StrategyController {
                     }
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.SCV_ASSIGNED) {
+                    Boolean progressStarted = null;
+
                     if(pi.getUnitType() == Vlasile.getNewestBuilding().getType()) {
                         if (Vlasile.getNewestBuilding().getID() == pi.getID()) {
+                            progressStarted = true;
                             pi.setPlannedItemStatus(PlannedItemStatus.IN_PROGRESS);
                             GameMethods.unreserveResources(pi.getUnitType());
                             System.out.println(pi.getUnitType() + " in progress");
                         }
                     }
+
+                    if(Vlasile.getFrameCount() % 480 == 0 && (!progressStarted)) {
+                        pi.setPlannedItemStatus(PlannedItemStatus.NOT_STARTED);
+                        System.out.println("Planned item timeout, resetting status");
+                    }
+                    else if (Vlasile.getFrameCount() % 480 == 0 && (progressStarted == null)) {
+                        progressStarted = false;
+                    }
+
                 }
                 else if (pi.getPlannedItemStatus() == PlannedItemStatus.IN_PROGRESS) {
                     if (Vlasile.getNewestFinishedBuilding().getType() == pi.getUnitType() && Vlasile.getNewestFinishedBuilding().getID() == pi.getID()) {

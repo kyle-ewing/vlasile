@@ -54,7 +54,6 @@ public class GameMethods {
         isReserved = false;
     }
 
-    //Finds tile location to place buildings and refineries (credit JumpyDoggoBot/Sonko Magnus)
     public static TilePosition getBuildTile(Unit builder, UnitType buildingType, TilePosition aroundTile) {
         TilePosition ret = null;
         int maxDist = 3;

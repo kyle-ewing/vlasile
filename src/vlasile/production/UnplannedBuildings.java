@@ -1,6 +1,7 @@
 package vlasile.production;
 
 import bwapi.Game;
+import bwapi.Unit;
 import bwapi.UnitType;
 import vlasile.GameMethods;
 import vlasile.enemy.EnemyStrategy;
@@ -15,10 +16,15 @@ public class UnplannedBuildings {
     private static int totalSupply;
     private static boolean initializeResponse = false;
     private static ArrayList<PlannedItem> plannedItems = StrategyController.getPlannedItems();
+    private static boolean depotBlock = false;
 
     public static void update() {
         addDepotToQueue();
-        earlyGameResponse();
+        supplyBlocked();
+
+        if(!initializeResponse) {
+            earlyGameResponse();
+        }
     }
 
     //Queue additional supply depots when there are none currently in the build queue, and also a certain supply threshold is met
@@ -62,18 +68,29 @@ public class UnplannedBuildings {
                 return true;
             }
         }
+        depotBlock = false;
         return false;
+    }
+
+    private static void supplyBlocked() {
+        freeSupply = GameMethods.getFreeSupply();
+
+        if(freeSupply < 0 && (!depotBlock)) {
+            plannedItems.add( new PlannedItem(UnitType.Terran_Supply_Depot, 0, PlannedItemStatus.NOT_STARTED, PlannedItemType.BUILDING));
+            depotBlock = true;
+            System.out.println("Supply Block Detected. Adding Supply Depot to Queue");
+        }
     }
 
     //Add a bunker to built as soon as possible if the enemy is 4 pooling
     private static void earlyGameResponse() {
-        if(!initializeResponse) {
             if(EnemyStrategy.getEnemyStrategy() != null) {
                 if(EnemyStrategy.getEnemyStrategy().getName().equals("4 Pool")) {
                   plannedItems.add(new PlannedItem(UnitType.Terran_Bunker, 0, PlannedItemStatus.NOT_STARTED, PlannedItemType.BUILDING));
+                  System.out.println(UnitType.Terran_Bunker + " added to build plan");
                 }
                 initializeResponse = true;
             }
-        }
+
     }
 }

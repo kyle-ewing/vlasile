@@ -19,6 +19,7 @@ public class EnemyZergStrategy extends EnemyStrategy{
         int drones = GameMethods.countUnitsOfType(UnitType.Zerg_Drone);
 
         if(pool > 0 && GameMethods.getSeconds() < 120 & drones <= 5) {
+            System.out.println("Enemy Strategy is 4 Pool");
             return _4Pool;
         }
         return null;

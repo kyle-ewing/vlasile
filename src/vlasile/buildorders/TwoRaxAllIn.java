@@ -52,7 +52,7 @@ public class TwoRaxAllIn {
 
     private static boolean quota() {
         if(UnitCount.getUnitCount().containsKey(UnitType.Terran_Marine)) {
-            if(UnitCount.getUnitCount().get(UnitType.Terran_Marine) >= 8) {
+            if(UnitCount.getUnitCount().get(UnitType.Terran_Marine) >= 16) {
                 return true;
             }
         }
