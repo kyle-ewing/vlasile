@@ -2,7 +2,7 @@
 
 ### About
 
-Terran bot created as a personal project to test my knowledge and understanding of Java and OOP.
+Terran bot created as a personal project to test my knowledge and understanding of Java.
 
 ### What it can currently do
 * Establish build order based on enemy race (Zerg only)
@@ -14,11 +14,7 @@ Terran bot created as a personal project to test my knowledge and understanding 
 * Create units
 
 ### Known Issues
-* **Workers assigned to building sometimes don't build**
-* ~~Build hangs up when worker is moving to go build~~ (Fixed 7/13/2019)
 * Scout begins to mine enemy minerals and return to enemy base
-
-###### **build breakers in bold**
 
 ### Long Term Goals
 * Create a build order that can defeat the ingame AI for every race
